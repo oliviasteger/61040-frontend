@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import EditProfileForm from "@/components/Profile/EditProfileForm.vue";
 import ProfileComponent from "@/components/Profile/ProfileComponent.vue";
-import SearchProfileForm from "@/components/Profile/SearchProfileForm.vue";
 import { useUserStore } from "@/stores/user";
 import { fetchy } from "@/utils/fetchy";
 import { storeToRefs } from "pinia";
-import { onBeforeMount, ref } from "vue";
+import { onBeforeMount, ref, watch } from "vue";
+import FriendComponentWrapper from "../Friend/FriendComponentWrapper.vue";
+import PostAuthorListComponent from "../Post/PostAuthorListComponent.vue";
+const props = defineProps(["username"]);
 
 const { currentUsername, isLoggedIn } = storeToRefs(useUserStore());
 
@@ -18,7 +20,7 @@ async function getProfile(user?: string) {
   let query: Record<string, string> = user !== undefined ? { owner: user } : {};
   let profileResult;
   try {
-    profileResult = await fetchy("api/profiles", "GET", { query });
+    profileResult = await fetchy("/api/profiles", "GET", { query });
   } catch (_) {
     return;
   }
@@ -31,23 +33,25 @@ function updateProfile(id: string) {
 }
 
 onBeforeMount(async () => {
-  await getProfile();
+  await getProfile(props.username);
+  loaded.value = true;
+});
+
+watch(props, async (newProps) => {
+  loaded.value = false;
+  await getProfile(newProps.username);
   loaded.value = true;
 });
 </script>
 
 <template>
   <section v-if="isLoggedIn">
-    <div class="row">
-      <h2 v-if="!searchUser">Profile for {{ currentUsername }}:</h2>
-      <h2 v-else>Profile for {{ searchUser }}:</h2>
-      <SearchProfileForm @getProfileByUser="getProfile" />
-    </div>
-    <section class="profiles" v-if="loaded">
-      <article>
-        <ProfileComponent v-if="editing !== profile._id" :profile="profile" @refreshProfile="getProfile" @editProfile="updateProfile" />
-        <EditProfileForm v-else :profile="profile" @refreshProfile="getProfile" @editProfile="updateProfile" />
-      </article>
+    <br />
+    <section v-if="loaded && profile">
+      <ProfileComponent v-if="editing !== profile._id" :profile="profile" @refreshProfile="getProfile" @editProfile="updateProfile" />
+      <EditProfileForm v-else :profile="profile" @refreshProfile="getProfile" @editProfile="updateProfile" />
+      <FriendComponentWrapper v-if="currentUsername !== username" :user="username" />
+      <PostAuthorListComponent :author="username" />
     </section>
     <p v-else>Loading...</p>
   </section>

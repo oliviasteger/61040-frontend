@@ -74,7 +74,7 @@ export default class UserConcept {
     this.isValidPhone(phone, this.lineNumberLength);
 
     if (user.phone.substring(user.phone.length - 4) !== phone) {
-      throw new NotAllowedError(`User not found!`);
+      throw new NotAllowedError(`Phone number does not match records.`);
     }
   }
 

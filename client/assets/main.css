@@ -2,6 +2,7 @@
 
 :root {
   --red: rgb(208, 67, 12);
+  --green: rgb(28, 184, 65);
   --base-bg: #f1f3f5;
 }
 
@@ -12,6 +13,11 @@ button.btn-small {
 button.button-error {
   color: white;
   background: var(--red);
+}
+
+button.button-success {
+  color: white;
+  background: var(--green);
 }
 
 a.button {

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useUserStore } from "@/stores/user";
+import { formatDate } from "@/utils/formatDate";
 import { storeToRefs } from "pinia";
 import { fetchy } from "../../utils/fetchy";
-import { formatDate } from "@/utils/formatDate";
 
 const props = defineProps(["post"]);
 const emit = defineEmits(["editPost", "refreshPosts"]);
@@ -20,10 +20,10 @@ const deletePost = async () => {
 
 <template>
   <p class="author">
-    <a :href="'/profile/' + props.post.author">{{ props.post.author }}</a>
+    <router-link :to="{ name: 'Profile', params: { username: props.post.author } }">{{ props.post.author }}</router-link>
     {{ props.post.tagged.length !== 0 ? "with" : "" }}
     <span v-for="(n, i) in props.post.tagged" :key="i">
-      <a :href="'/profile/' + n">{{ n }}</a>
+      <router-link :to="{ name: 'Profile', params: { username: n } }">{{ n }}</router-link>
       <span v-if="i < props.post.tagged.length - 1">, </span>
     </span>
   </p>

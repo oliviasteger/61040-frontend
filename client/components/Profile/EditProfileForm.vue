@@ -20,22 +20,33 @@ const editProfile = async (name: string | undefined, details: string | undefined
 </script>
 
 <template>
-  <form @submit.prevent="editProfile(name, details)">
-    <p class="username">{{ props.profile.user }}</p>
-    <input id="name" type="text" v-model="name" placeholder="Add a display name!" />
-    <textarea id="details" v-model="details" placeholder="Add some details about yourself!" required> </textarea>
-    <div class="base">
-      <menu>
-        <li><button class="btn-small pure-button-primary pure-button" type="submit">Save</button></li>
-        <li><button class="btn-small pure-button" @click="emit('editProfile')">Cancel</button></li>
-      </menu>
-      <p v-if="props.profile.dateCreated !== props.profile.dateUpdated" class="timestamp">Edited on: {{ formatDate(props.profile.dateUpdated) }}</p>
-      <p v-else class="timestamp">Created on: {{ formatDate(props.profile.dateCreated) }}</p>
-    </div>
-  </form>
+  <div class="profile">
+    <form @submit.prevent="editProfile(name, details)">
+      <p class="username">{{ props.profile.user }}</p>
+      <input id="name" type="text" v-model="name" placeholder="Add a display name!" />
+      <textarea id="details" v-model="details" placeholder="Add some details about yourself!" required> </textarea>
+      <div class="base">
+        <menu>
+          <li><button class="btn-small pure-button-primary pure-button" type="submit">Save</button></li>
+          <li><button class="btn-small pure-button" @click="emit('editProfile')">Cancel</button></li>
+        </menu>
+        <p v-if="props.profile.dateCreated !== props.profile.dateUpdated" class="timestamp">Edited on: {{ formatDate(props.profile.dateUpdated) }}</p>
+        <p v-else class="timestamp">Created on: {{ formatDate(props.profile.dateCreated) }}</p>
+      </div>
+    </form>
+  </div>
 </template>
 
 <style scoped>
+.profile {
+  background-color: var(--base-bg);
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 1em;
+}
+
 form {
   background-color: var(--base-bg);
   display: flex;

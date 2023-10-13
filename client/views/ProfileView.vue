@@ -4,6 +4,6 @@ import ProfileListComponent from "../components/Profile/ProfileListComponent.vue
 
 <template>
   <main class="column">
-    <ProfileListComponent />
+    <ProfileListComponent :username="$route.params.username" />
   </main>
 </template>

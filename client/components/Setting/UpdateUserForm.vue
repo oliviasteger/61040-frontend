@@ -21,7 +21,7 @@ async function updatePassword() {
 }
 
 async function updatePhone() {
-  await UpdateUser({ phone: phone.value });
+  await updateUser({ phone: phone.value });
   await updateSession();
   phone.value = "";
 }

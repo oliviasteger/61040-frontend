@@ -114,7 +114,7 @@ onBeforeMount(async () => {
       <span v-else> No reactions yet! </span>
     </div>
     <div class="base">
-      <input type="text" v-model="content" placeholder="Add emoji reaction!" />
+      <input type="text" maxlength="1" v-model="content" placeholder="Add emoji reaction!" />
       <menu v-if="reactions.filter((reaction) => reaction.user === currentUsername).length !== 0">
         <li><button class="btn-small pure-button" @click="editReaction(content)">Update Reaction</button></li>
         <li><button class="button-error btn-small pure-button" @click="deleteReaction">Delete</button></li>

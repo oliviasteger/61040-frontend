@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useUserStore } from "@/stores/user";
+import { formatDate } from "@/utils/formatDate";
 import { storeToRefs } from "pinia";
 import { fetchy } from "../../utils/fetchy";
-import { formatDate } from "@/utils/formatDate";
 
 const props = defineProps(["thread"]);
 const emit = defineEmits(["editThread", "refreshThreads"]);
@@ -21,7 +21,7 @@ const deleteThread = async () => {
 <template>
   <div class="thread">
     <p class="author">
-      <a :href="'/profile/' + props.thread.user">{{ props.thread.user }}</a>
+      <router-link :to="{ name: 'Profile', params: { username: props.thread.user } }">{{ props.thread.user }}</router-link>
     </p>
     <p>{{ props.thread.content }}</p>
     <div class="base">

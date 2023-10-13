@@ -70,8 +70,6 @@ async function getFriendData() {
     status.value = "received";
     return;
   }
-
-  console.log(props.user, status.value);
 }
 
 onBeforeMount(async () => {

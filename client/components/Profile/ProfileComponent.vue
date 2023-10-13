@@ -9,7 +9,7 @@ const { currentUsername } = storeToRefs(useUserStore());
 </script>
 
 <template>
-  <div class="profile">
+  <section class="profile">
     <p class="username">{{ props.profile.user }}</p>
     <p>Display name: {{ props.profile.name }}</p>
     <p>Display details: {{ props.profile.details }}</p>
@@ -22,7 +22,7 @@ const { currentUsername } = storeToRefs(useUserStore());
         <p v-else>Created on: {{ formatDate(props.profile.dateCreated) }}</p>
       </article>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import ProfileListComponent from "../components/Profile/ProfileListComponent.vue";
+import ProfileWrapperComponent from "../components/Profile/ProfileWrapperComponent.vue";
 </script>
 
 <template>
   <main class="column">
-    <ProfileListComponent :username="$route.params.username" />
+    <ProfileWrapperComponent :username="$route.params.username" />
   </main>
 </template>

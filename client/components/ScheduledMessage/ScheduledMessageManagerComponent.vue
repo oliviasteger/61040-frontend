@@ -17,7 +17,7 @@ let editing = ref("");
 async function getScheduledMessages() {
   let receivedResults;
   try {
-    receivedResults = await fetchy("/scheduledmessages/received", "GET");
+    receivedResults = await fetchy("/api/scheduledmessages/received", "GET");
   } catch (_) {
     return;
   }
@@ -25,7 +25,7 @@ async function getScheduledMessages() {
 
   let sentResults;
   try {
-    sentResults = await fetchy("/scheduledmessages/sent", "GET");
+    sentResults = await fetchy("/api/scheduledmessages/sent", "GET");
   } catch (_) {
     return;
   }
@@ -45,13 +45,13 @@ onBeforeMount(async () => {
 <template>
   <section v-if="isLoggedIn">
     <h2>Create a scheduled message:</h2>
-    <CreateScheduledMessageForm @refreshMsgs="getScheduledMessages" />
+    <CreateScheduledMessageForm @refreshMessages="getScheduledMessages" />
     <div class="row">
       <h2>Received Messages:</h2>
     </div>
     <section class="received" v-if="loaded && received.length !== 0">
       <article v-for="msg in received" :key="msg._id">
-        <ScheduledMessageComponent :msg="msg" @refreshMsgs="getScheduledMessages" @editMsg="updateEditing" />
+        <ScheduledMessageComponent :message="msg" status="locked" @refreshMessages="getScheduledMessages" @editMessage="updateEditing" />
       </article>
     </section>
     <p v-else-if="loaded">No messages received</p>
@@ -62,8 +62,14 @@ onBeforeMount(async () => {
     </div>
     <section class="sent" v-if="loaded && sent.length !== 0">
       <article v-for="msg in sent" :key="msg._id">
-        <ScheduledMessageComponent v-if="editing !== msg._id" :msg="msg" @refreshMsgs="getScheduledMessages" @editMsg="updateEditing" />
-        <EditScheduledMessageForm v-else :msg="msg" @refreshMsgs="getScheduledMessages" @editMsg="updateEditing" />
+        <ScheduledMessageComponent
+          v-if="editing !== msg._id"
+          :message="msg"
+          :status="new Date(msg.scheduledTime).getTime() > Date.now() ? 'editable' : 'locked'"
+          @refreshMessages="getScheduledMessages"
+          @editMessage="updateEditing"
+        />
+        <EditScheduledMessageForm v-else :message="msg" @refreshMessages="getScheduledMessages" @editMessage="updateEditing" />
       </article>
     </section>
     <p v-else-if="loaded">No messages sent</p>

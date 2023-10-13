@@ -3,6 +3,7 @@ import { AlreadyFriendsError, FriendNotFoundError, FriendRequestAlreadyExistsErr
 import { PostAuthorNotMatchError, PostDoc } from "./concepts/post";
 import { ProfileDoc } from "./concepts/profile";
 import { ReactionDoc } from "./concepts/reaction";
+import { ScheduledMessageDoc } from "./concepts/scheduledmessage";
 import { ThreadDoc } from "./concepts/thread";
 import { Router } from "./framework/router";
 
@@ -36,6 +37,17 @@ export default class Responses {
     }
 
     return posts.map((post, i) => ({ ...post, author: authors[i], tagged: tagged[i] }));
+  }
+
+  static async messages(messages: ScheduledMessageDoc[]) {
+    const users = await User.idsToUsernames(messages.map((message) => message.user));
+    const recipients: string[][] = [];
+
+    for (const message of messages) {
+      recipients.push(await User.idsToUsernames(message.recipients));
+    }
+
+    return messages.map((message, i) => ({ ...message, user: users[i], recipients: recipients[i] }));
   }
 
   /**

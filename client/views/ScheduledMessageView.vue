@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import ScheduledMessageListComponent from "../components/ScheduledMessage/ScheduledMessageListComponent.vue";
+import ScheduledMessageManagerComponent from "../components/ScheduledMessage/ScheduledMessageManagerComponent.vue";
 </script>
 
 <template>
   <main class="column">
-    <ScheduledMessageListComponent />
+    <ScheduledMessageManagerComponent />
   </main>
 </template>

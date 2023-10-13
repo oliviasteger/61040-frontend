@@ -428,13 +428,15 @@ class Routes {
   async getScheduledMessagesByRecipient(session: WebSessionDoc) {
     const user = WebSession.getUser(session);
     const date = Date.now();
-    return await ScheduledMessage.getScheduledMessagesByRecipient(user, date);
+    const messages = await ScheduledMessage.getScheduledMessagesByRecipient(user, date);
+    return await Responses.messages(messages);
   }
 
   @Router.get("/scheduledmessages/sent")
   async getScheduledMessagesBySender(session: WebSessionDoc) {
     const user = WebSession.getUser(session);
-    return await ScheduledMessage.getScheduledMessagesBySender(user);
+    const messages = await ScheduledMessage.getScheduledMessagesBySender(user);
+    return await Responses.messages(messages);
   }
 
   @Router.post("/scheduledmessages/")

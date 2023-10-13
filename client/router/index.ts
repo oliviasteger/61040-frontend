@@ -6,6 +6,7 @@ import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 import ProfileView from "../views/ProfileView.vue";
+import ScheduledMessageView from "../views/ScheduledMessageView.vue";
 import SettingView from "../views/SettingView.vue";
 
 const router = createRouter({
@@ -26,6 +27,12 @@ const router = createRouter({
       path: "/profile/:username",
       name: "Profile",
       component: ProfileView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/messages",
+      name: "Messages",
+      component: ScheduledMessageView,
       meta: { requiresAuth: true },
     },
     {

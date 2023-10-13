@@ -4,6 +4,7 @@ import { ref } from "vue";
 
 let username = ref("");
 let password = ref("");
+let phone = ref("");
 
 const { updateUser, updateSession } = useUserStore();
 
@@ -17,6 +18,12 @@ async function updatePassword() {
   await updateUser({ password: password.value });
   await updateSession();
   password.value = "";
+}
+
+async function updatePhone() {
+  await UpdateUser({ phone: phone.value });
+  await updateSession();
+  phone.value = "";
 }
 </script>
 
@@ -35,6 +42,14 @@ async function updatePassword() {
       <legend>Change your password</legend>
       <input type="password" placeholder="New password" v-model="password" required />
       <button type="submit" class="pure-button pure-button-primary">Update password</button>
+    </fieldset>
+  </form>
+
+  <form @submit.prevent="updatePhone" class="pure-form">
+    <fieldset>
+      <legend>Change your phone number</legend>
+      <input type="tel" placeholder="New phone number" v-model="phone" required />
+      <button type="submit" class="pure-button pure-button-primary">Update phone number</button>
     </fieldset>
   </form>
 </template>

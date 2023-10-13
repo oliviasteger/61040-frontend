@@ -1,6 +1,9 @@
 import { User } from "./app";
 import { AlreadyFriendsError, FriendNotFoundError, FriendRequestAlreadyExistsError, FriendRequestDoc, FriendRequestNotFoundError } from "./concepts/friend";
 import { PostAuthorNotMatchError, PostDoc } from "./concepts/post";
+import { ProfileDoc } from "./concepts/profile";
+import { ReactionDoc } from "./concepts/reaction";
+import { ThreadDoc } from "./concepts/thread";
 import { Router } from "./framework/router";
 
 /**
@@ -16,7 +19,9 @@ export default class Responses {
       return post;
     }
     const author = await User.getUserById(post.author);
-    return { ...post, author: author.username };
+    const tagged = await User.idsToUsernames(post.tagged);
+
+    return { ...post, author: author.username, tagged: tagged };
   }
 
   /**
@@ -24,7 +29,13 @@ export default class Responses {
    */
   static async posts(posts: PostDoc[]) {
     const authors = await User.idsToUsernames(posts.map((post) => post.author));
-    return posts.map((post, i) => ({ ...post, author: authors[i] }));
+    const tagged: string[][] = [];
+
+    for (const post of posts) {
+      tagged.push(await User.idsToUsernames(post.tagged));
+    }
+
+    return posts.map((post, i) => ({ ...post, author: authors[i], tagged: tagged[i] }));
   }
 
   /**
@@ -36,6 +47,26 @@ export default class Responses {
     const to = requests.map((request) => request.to);
     const usernames = await User.idsToUsernames(from.concat(to));
     return requests.map((request, i) => ({ ...request, from: usernames[i], to: usernames[i + requests.length] }));
+  }
+
+  static async profile(profile: ProfileDoc | null) {
+    if (!profile) {
+      return profile;
+    }
+
+    const user = await User.getUserById(profile.user);
+
+    return { ...profile, user: user.username };
+  }
+
+  static async reactions(reactions: ReactionDoc[]) {
+    const usernames = await User.idsToUsernames(reactions.map((reaction) => reaction.user));
+    return reactions.map((reaction, i) => ({ ...reaction, user: usernames[i] }));
+  }
+
+  static async threads(threads: ThreadDoc[]) {
+    const usernames = await User.idsToUsernames(threads.map((thread) => thread.user));
+    return threads.map((thread, i) => ({ ...thread, user: usernames[i] }));
   }
 }
 

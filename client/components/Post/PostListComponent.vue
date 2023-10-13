@@ -7,6 +7,8 @@ import { fetchy } from "@/utils/fetchy";
 import { storeToRefs } from "pinia";
 import { onBeforeMount, ref } from "vue";
 import SearchPostForm from "./SearchPostForm.vue";
+import ReactionComponent from "@/components/Reaction/ReactionComponent.vue";
+import ThreadListComponent from "@/components/Thread/ThreadListComponent.vue";
 
 const { isLoggedIn } = storeToRefs(useUserStore());
 
@@ -41,20 +43,24 @@ onBeforeMount(async () => {
   <section v-if="isLoggedIn">
     <h2>Create a post:</h2>
     <CreatePostForm @refreshPosts="getPosts" />
+    <div class="row">
+      <h2 v-if="!searchAuthor">Posts:</h2>
+      <h2 v-else>Posts by {{ searchAuthor }}:</h2>
+      <SearchPostForm @getPostsByAuthor="getPosts" />
+    </div>
+    <section class="posts" v-if="loaded && posts.length !== 0">
+      <article v-for="post in posts" :key="post._id">
+        <PostComponent v-if="editing !== post._id" :post="post" @refreshPosts="getPosts" @editPost="updateEditing" />
+        <EditPostForm v-else :post="post" @refreshPosts="getPosts" @editPost="updateEditing" />
+        <div class="feedback">
+          <ReactionComponent :post="post" />
+          <ThreadListComponent :post="post" />
+        </div>
+      </article>
+    </section>
+    <p v-else-if="loaded">No posts found</p>
+    <p v-else>Loading...</p>
   </section>
-  <div class="row">
-    <h2 v-if="!searchAuthor">Posts:</h2>
-    <h2 v-else>Posts by {{ searchAuthor }}:</h2>
-    <SearchPostForm @getPostsByAuthor="getPosts" />
-  </div>
-  <section class="posts" v-if="loaded && posts.length !== 0">
-    <article v-for="post in posts" :key="post._id">
-      <PostComponent v-if="editing !== post._id" :post="post" @refreshPosts="getPosts" @editPost="updateEditing" />
-      <EditPostForm v-else :post="post" @refreshPosts="getPosts" @editPost="updateEditing" />
-    </article>
-  </section>
-  <p v-else-if="loaded">No posts found</p>
-  <p v-else>Loading...</p>
 </template>
 
 <style scoped>

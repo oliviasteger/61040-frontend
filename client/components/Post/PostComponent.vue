@@ -19,8 +19,16 @@ const deletePost = async () => {
 </script>
 
 <template>
-  <p class="author">{{ props.post.author }}</p>
+  <p class="author">
+    <a :href="'/profile/' + props.post.author">{{ props.post.author }}</a>
+    {{ props.post.tagged.length !== 0 ? "with" : "" }}
+    <span v-for="(n, i) in props.post.tagged" :key="i">
+      <a :href="'/profile/' + n">{{ n }}</a>
+      <span v-if="i < props.post.tagged.length - 1">, </span>
+    </span>
+  </p>
   <p>{{ props.post.content }}</p>
+  <img :src="post.image" />
   <div class="base">
     <menu v-if="props.post.author == currentUsername">
       <li><button class="btn-small pure-button" @click="emit('editPost', props.post._id)">Edit</button></li>

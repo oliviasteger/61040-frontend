@@ -4,12 +4,18 @@ import { fetchy } from "../../utils/fetchy";
 import { formatDate } from "../../utils/formatDate";
 
 const props = defineProps(["post"]);
-const content = ref(props.post.content);
+const text = ref(props.post.content ? props.post.content : props.post.image);
+const picked = ref(props.post.content ? "Content" : "Image");
+const tagged = ref(props.post.tagged);
 const emit = defineEmits(["editPost", "refreshPosts"]);
 
-const editPost = async (content: string) => {
+const editPost = async (content: string | undefined, image: string | undefined, tagged: string) => {
+  const taggedParsed = tagged
+    .replace(" ", "")
+    .split(",")
+    .filter((x) => x.length !== 0);
   try {
-    await fetchy(`api/posts/${props.post._id}`, "PATCH", { body: { update: { content: content } } });
+    await fetchy(`api/posts/${props.post._id}`, "PATCH", { body: { update: { content: content, image: image, tagged: taggedParsed } } });
   } catch (e) {
     return;
   }
@@ -19,9 +25,13 @@ const editPost = async (content: string) => {
 </script>
 
 <template>
-  <form @submit.prevent="editPost(content)">
-    <p class="author">{{ props.post.author }}</p>
-    <textarea id="content" v-model="content" placeholder="Create a post!" required> </textarea>
+  <form @submit.prevent="editPost(picked === 'Content' ? text : undefined, picked === 'Image' ? text : undefined, tagged)">
+    <p class="author">{{ props.post.author }} {{ props.post.tagged.length !== 0 ? "with" : "" }} {{ props.post.tagged.join(", ") }}</p>
+    <p>Select a post type:</p>
+    <label for="image"> <input type="radio" name="type" id="image" value="Image" v-model="picked" required /> Image</label>
+    <label for="content"> <input type="radio" name="type" id="content" value="Content" v-model="picked" required /> Content</label>
+    <textarea id="text" v-model="text" placeholder="Create a post!" required> </textarea>
+    <input id="tagged" type="text" v-model="tagged" placeholder="Add tagged usernames!" />
     <div class="base">
       <menu>
         <li><button class="btn-small pure-button-primary pure-button" type="submit">Save</button></li>

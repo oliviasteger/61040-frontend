@@ -7,22 +7,22 @@ import { fetchy } from "../../utils/fetchy";
 const loaded = ref(false);
 const props = defineProps(["post", "thread"]);
 const reactions = ref<Array<Record<string, string>>>([]);
-let tally = {};
-let topReactions = ref([]);
+let tally: Record<string, number>;
+let topReactions = ref<Array<string>>([]);
 const content = ref("");
 
 const { currentUsername } = storeToRefs(useUserStore());
 
 async function getReactions() {
   tally = {};
-  let fetchedReactions;
+  let fetchedReactions: { user: string; content: string; target: string }[];
   if (props.post) {
     try {
       fetchedReactions = await fetchy(`api/posts/${props.post._id}/reactions`, "GET");
     } catch {
       return;
     }
-  } else if (props.thread) {
+  } else {
     try {
       fetchedReactions = await fetchy(`api/threads/${props.thread._id}/reactions`, "GET");
     } catch {

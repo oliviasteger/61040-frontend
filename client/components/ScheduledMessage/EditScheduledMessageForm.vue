@@ -5,7 +5,7 @@ import { formatDate } from "../../utils/formatDate";
 
 const props = defineProps(["message"]);
 const content = ref(
-  props.message.content.map((obj) => {
+  props.message.content.map((obj: { imageUrl: string } | { content: string }) => {
     if ("imageUrl" in obj) return { type: "Image", text: obj.imageUrl };
     if ("content" in obj) return { type: "Content", text: obj.content };
   }),
@@ -30,8 +30,8 @@ const editMessage = async (
     .split(",")
     .filter((x) => x.length !== 0);
   const contentParsed = content.map((entry) => {
-    if (entry.type == "Image") return { imageUrl: entry.text };
-    if (entry.type == "Content") return { content: entry.text };
+    if (entry.type == "Image") return { imageUrl: entry.text, content: null };
+    else return { imageUrl: null, content: entry.text };
   });
   const dateParsed = new Date(scheduledTime).getTime();
 

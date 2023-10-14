@@ -8,7 +8,7 @@ const name = ref(props.profile.name);
 const details = ref(props.profile.details);
 const emit = defineEmits(["editProfile", "refreshProfile"]);
 
-const editProfile = async (name: string | undefined, details: string | undefined) => {
+const editProfile = async (name: string, details: string) => {
   try {
     await fetchy(`api/profiles`, "PATCH", { body: { update: { name: name, details: details } } });
   } catch (e) {

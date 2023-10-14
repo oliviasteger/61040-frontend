@@ -7,7 +7,7 @@ const picked = ref("Image");
 const tagged = ref("");
 const emit = defineEmits(["refreshPosts"]);
 
-const createPost = async (content: string | undefined, image: string | undefined, tagged: string) => {
+const createPost = async (content: string | null, image: string | null, tagged: string) => {
   const taggedParsed = tagged
     .replace(" ", "")
     .split(",")
@@ -31,7 +31,7 @@ const emptyForm = () => {
 </script>
 
 <template>
-  <form @submit.prevent="createPost(picked === 'Content' ? text : undefined, picked === 'Image' ? text : undefined, tagged)">
+  <form @submit.prevent="createPost(picked === 'Content' ? text : null, picked === 'Image' ? text : null, tagged)">
     <p>Select a post type:</p>
     <label for="image"> <input type="radio" name="type" id="image" value="Image" v-model="picked" required /> Image</label>
     <label for="content"> <input type="radio" name="type" id="content" value="Content" v-model="picked" required /> Content</label>

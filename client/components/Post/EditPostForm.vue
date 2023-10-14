@@ -9,7 +9,7 @@ const picked = ref(props.post.content ? "Content" : "Image");
 const tagged = ref(props.post.tagged);
 const emit = defineEmits(["editPost", "refreshPosts"]);
 
-const editPost = async (content: string | undefined, image: string | undefined, tagged: string) => {
+const editPost = async (content: string | null, image: string | null, tagged: string) => {
   const taggedParsed = tagged
     .replace(" ", "")
     .split(",")
@@ -25,7 +25,7 @@ const editPost = async (content: string | undefined, image: string | undefined, 
 </script>
 
 <template>
-  <form @submit.prevent="editPost(picked === 'Content' ? text : undefined, picked === 'Image' ? text : undefined, tagged)">
+  <form @submit.prevent="editPost(picked === 'Content' ? text : null, picked === 'Image' ? text : null, tagged)">
     <p class="author">{{ props.post.author }} {{ props.post.tagged.length !== 0 ? "with" : "" }} {{ props.post.tagged.join(", ") }}</p>
     <p>Select a post type:</p>
     <label for="image"> <input type="radio" name="type" id="image" value="Image" v-model="picked" required /> Image</label>

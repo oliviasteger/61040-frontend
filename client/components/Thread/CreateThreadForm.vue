@@ -6,7 +6,7 @@ const text = ref("");
 const emit = defineEmits(["refreshThreads"]);
 const props = defineProps(["post", "thread"]);
 
-const createThread = async (content: string | undefined) => {
+const createThread = async (content: string) => {
   if (props.post) {
     try {
       await fetchy(`api/posts/${props.post._id}/threads`, "POST", { body: { root: props.post._id, content: content } });

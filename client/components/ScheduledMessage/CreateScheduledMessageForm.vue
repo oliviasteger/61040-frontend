@@ -27,8 +27,8 @@ const createScheduledMessage = async (
     .split(",")
     .filter((x) => x.length !== 0);
   const contentParsed = content.map((entry) => {
-    if (entry.type == "Image") return { imageUrl: entry.text };
-    if (entry.type == "Content") return { content: entry.text };
+    if (entry.type == "Image") return { imageUrl: entry.text, content: null };
+    else return { content: entry.text, imageUrl: null };
   });
 
   const dateParsed = new Date(scheduledTime).getTime();

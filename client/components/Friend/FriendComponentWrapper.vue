@@ -12,7 +12,7 @@ const loaded = ref(false);
 let status = ref("none");
 
 async function getFriendData() {
-  let friendResults = [];
+  let friendResults: string[] = [];
 
   try {
     friendResults = await fetchy("/api/friends", "GET");
@@ -25,7 +25,7 @@ async function getFriendData() {
     return;
   }
 
-  let sentResults = [];
+  let sentResults: { to: string; from: string; status: string }[] = [];
 
   try {
     sentResults = await fetchy("/api/friend/requests", "GET");
@@ -34,7 +34,7 @@ async function getFriendData() {
   }
 
   // Filter out users who are already friends or who have rejected the request
-  sentResults = sentResults
+  let sentTo = sentResults
     .filter((request) => {
       const fromUser = request.from == currentUsername.value;
       const isFriendAlready = friendResults.includes(request.to);
@@ -43,12 +43,12 @@ async function getFriendData() {
     })
     .map((request) => request.to);
 
-  if (sentResults.includes(props.user)) {
+  if (sentTo.includes(props.user)) {
     status.value = "sent";
     return;
   }
 
-  let receivedResults = [];
+  let receivedResults: { to: string; from: string; status: string }[] = [];
 
   try {
     receivedResults = await fetchy("/api/friend/requests", "GET");
@@ -57,7 +57,7 @@ async function getFriendData() {
   }
 
   // Filter out users who are already friends or requests that have already been accepted
-  receivedResults = receivedResults
+  let receivedFrom = receivedResults
     .filter((request) => {
       const fromUser = request.to == currentUsername.value;
       const isFriendAlready = friendResults.includes(request.from);
@@ -66,7 +66,7 @@ async function getFriendData() {
     })
     .map((request) => request.from);
 
-  if (receivedResults.includes(props.user)) {
+  if (receivedFrom.includes(props.user)) {
     status.value = "received";
     return;
   }

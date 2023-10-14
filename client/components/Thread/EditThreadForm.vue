@@ -7,7 +7,7 @@ const props = defineProps(["thread"]);
 const text = ref(props.thread.content);
 const emit = defineEmits(["editThread", "refreshThreads"]);
 
-const editThread = async (content: string | undefined) => {
+const editThread = async (content: string) => {
   try {
     await fetchy(`api/threads/${props.thread._id}`, "PATCH", { body: { update: { content: content } } });
   } catch (e) {

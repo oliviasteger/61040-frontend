@@ -14,7 +14,7 @@ let sent = ref<Array<Record<string, string>>>([]);
 let received = ref<Array<Record<string, string>>>([]);
 
 async function getFriendData() {
-  let friendResults = [];
+  let friendResults: string[] = [];
 
   try {
     friendResults = await fetchy("/api/friends", "GET");
@@ -24,7 +24,11 @@ async function getFriendData() {
 
   friends.value = friendResults;
 
-  let sentResults = [];
+  let sentResults: {
+    from: string;
+    to: string;
+    status: string;
+  }[] = [];
 
   try {
     sentResults = await fetchy("/api/friend/requests", "GET");
@@ -40,7 +44,11 @@ async function getFriendData() {
     return fromUser && !isFriendAlready && statusIsPending;
   });
 
-  let receivedResults = [];
+  let receivedResults: {
+    from: string;
+    to: string;
+    status: string;
+  }[] = [];
   try {
     receivedResults = await fetchy("/api/friend/requests", "GET");
   } catch (_) {

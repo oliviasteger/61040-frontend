@@ -8,6 +8,8 @@ import { useUserStore } from "@/stores/user";
 import { fetchy } from "@/utils/fetchy";
 import { storeToRefs } from "pinia";
 import { onBeforeMount, ref } from "vue";
+import AnnouncementComponent from "../Announcement/AnnouncementComponent.vue";
+import RecapComponent from "../Recap/RecapComponent.vue";
 import SearchPostForm from "./SearchPostForm.vue";
 
 const { isLoggedIn } = storeToRefs(useUserStore());
@@ -41,7 +43,9 @@ onBeforeMount(async () => {
 
 <template>
   <section v-if="isLoggedIn">
-    <h2>Create a post:</h2>
+    <br />
+    <RecapComponent />
+    <AnnouncementComponent />
     <CreatePostForm @refreshPosts="getPosts" />
     <div class="row">
       <h2 v-if="!searchAuthor">Posts:</h2>
@@ -49,14 +53,16 @@ onBeforeMount(async () => {
       <SearchPostForm @getPostsByAuthor="getPosts" />
     </div>
     <section class="posts" v-if="loaded && posts.length !== 0">
-      <article v-for="post in posts" :key="post._id">
-        <PostComponent v-if="editing !== post._id" :post="post" @refreshPosts="getPosts" @editPost="updateEditing" />
-        <EditPostForm v-else :post="post" @refreshPosts="getPosts" @editPost="updateEditing" />
+      <div v-for="post in posts" :key="post._id">
+        <article>
+          <PostComponent v-if="editing !== post._id" :post="post" @refreshPosts="getPosts" @editPost="updateEditing" />
+          <EditPostForm v-else :post="post" @refreshPosts="getPosts" @editPost="updateEditing" />
+        </article>
         <div class="feedback">
           <ReactionComponent :post="post" />
           <ThreadListComponent :post="post" />
         </div>
-      </article>
+      </div>
     </section>
     <p v-else-if="loaded">No posts found</p>
     <p v-else>Loading...</p>
@@ -64,36 +70,10 @@ onBeforeMount(async () => {
 </template>
 
 <style scoped>
-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-}
-
 section,
 p,
 .row {
   margin: 0 auto;
-  max-width: 60em;
-}
-
-article {
-  background-color: var(--base-bg);
-  border-radius: 1em;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  padding: 1em;
-}
-
-.posts {
-  padding: 1em;
-}
-
-.row {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
-  max-width: 60em;
+  max-width: 50em;
 }
 </style>

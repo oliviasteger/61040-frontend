@@ -14,12 +14,3 @@ const emit = defineEmits(["getPostsByAuthor"]);
     </fieldset>
   </form>
 </template>
-
-<style scoped>
-form {
-  display: flex;
-  gap: 0.5em;
-  padding: 1em;
-  align-items: center;
-}
-</style>

@@ -3,6 +3,7 @@ import { AlreadyFriendsError, FriendNotFoundError, FriendRequestAlreadyExistsErr
 import { PostAuthorNotMatchError, PostDoc } from "./concepts/post";
 import { ProfileDoc } from "./concepts/profile";
 import { ReactionDoc } from "./concepts/reaction";
+import { RecapDoc } from "./concepts/recap";
 import { ScheduledMessageDoc } from "./concepts/scheduledmessage";
 import { ThreadDoc } from "./concepts/thread";
 import { Router } from "./framework/router";
@@ -79,6 +80,14 @@ export default class Responses {
   static async threads(threads: ThreadDoc[]) {
     const usernames = await User.idsToUsernames(threads.map((thread) => thread.user));
     return threads.map((thread, i) => ({ ...thread, user: usernames[i] }));
+  }
+
+  static async recap(recap: RecapDoc) {
+    const user = await User.getUserById(recap.user);
+    const leastInteractedWith = await User.idsToUsernames(recap.leastInteractedWith);
+    const mostInteractedWith = await User.idsToUsernames(recap.mostInteractedWith);
+
+    return { ...recap, user: user, leastInteractedWith: leastInteractedWith, mostInteractedWith: mostInteractedWith };
   }
 }
 

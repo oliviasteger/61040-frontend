@@ -104,7 +104,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <div class="reaction">
+  <article>
     <div class="reactions" v-if="loaded">
       <span v-if="topReactions.length !== 0">
         <span v-for="reaction in topReactions" :key="reaction">
@@ -123,41 +123,5 @@ onBeforeMount(async () => {
         <li><button class="btn-small pure-button" @click="createReaction(content)">React</button></li>
       </menu>
     </div>
-  </div>
+  </article>
 </template>
-
-<style scoped>
-menu {
-  list-style-type: none;
-  display: flex;
-  flex-direction: row;
-  gap: 1em;
-  padding: 0;
-  margin: 0;
-}
-
-.base {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.base article:only-child {
-  margin-left: auto;
-}
-
-.reaction {
-  background-color: #fff;
-  padding: 1em;
-  border-radius: 1em;
-  margin-bottom: 1em;
-}
-
-.reactions {
-  text-align: center;
-  padding: 1em;
-  background-color: var(--base-bg);
-  border-radius: 1em;
-  margin-bottom: 1em;
-}
-</style>

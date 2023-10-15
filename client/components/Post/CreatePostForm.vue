@@ -32,6 +32,7 @@ const emptyForm = () => {
 
 <template>
   <form @submit.prevent="createPost(picked === 'Content' ? text : null, picked === 'Image' ? text : null, tagged)">
+    <h2>Create a post</h2>
     <p>Select a post type:</p>
     <label for="image"> <input type="radio" name="type" id="image" value="Image" v-model="picked" required /> Image</label>
     <label for="content"> <input type="radio" name="type" id="content" value="Content" v-model="picked" required /> Content</label>
@@ -40,32 +41,3 @@ const emptyForm = () => {
     <button type="submit" class="pure-button-primary pure-button">Create Post</button>
   </form>
 </template>
-
-<style scoped>
-form {
-  background-color: var(--base-bg);
-  border-radius: 1em;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  padding: 1em;
-}
-
-textarea {
-  font-family: inherit;
-  font-size: inherit;
-  height: 6em;
-  padding: 0.5em;
-  border-radius: 4px;
-  resize: none;
-}
-
-input[type="text"] {
-  font-family: inherit;
-  font-size: inherit;
-  padding: 0.5em;
-  border-radius: 4px;
-  resize: none;
-  border: 1px solid black;
-}
-</style>

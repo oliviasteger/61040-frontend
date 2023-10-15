@@ -17,13 +17,4 @@ export default class RecapConcept {
     const _id = await this.recaps.createOne({ user, numPost, numThread, numReaction, mostInteractedWith, leastInteractedWith });
     return { msg: "Recap successfully created!", recap: await this.recaps.readOne({ _id }) };
   }
-
-  async getRecaps(user: ObjectId) {
-    return await this.recaps.readMany(
-      { user },
-      {
-        sort: { dateUpdated: -1 },
-      },
-    );
-  }
 }

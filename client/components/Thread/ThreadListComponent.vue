@@ -44,50 +44,25 @@ onBeforeMount(async () => {
   <CreateThreadForm v-if="post" :post="post" @refreshThreads="getThreads" />
   <CreateThreadForm v-if="thread" :thread="thread" @refreshThreads="getThreads" />
   <section class="threads" v-if="loaded && threads.length !== 0">
-    <article v-for="thread in threads" :key="thread._id">
-      <ThreadComponent v-if="editing !== thread._id" :thread="thread" @refreshThreads="getThreads" @editThread="updateEditing" />
-      <EditThreadForm v-else :thread="thread" @refreshThreads="getThreads" @editThread="updateEditing" />
+    <div v-for="thread in threads" :key="thread._id">
+      <article>
+        <ThreadComponent v-if="editing !== thread._id" :thread="thread" @refreshThreads="getThreads" @editThread="updateEditing" />
+        <EditThreadForm v-else :thread="thread" @refreshThreads="getThreads" @editThread="updateEditing" />
+      </article>
       <div class="feedback">
         <ReactionComponent :thread="thread" />
         <ThreadListComponent :thread="thread" />
       </div>
-    </article>
+    </div>
   </section>
-  <p v-else-if="loaded">No threads found</p>
+  <article v-else-if="loaded">No threads found</article>
   <p v-else>Loading...</p>
 </template>
 
 <style scoped>
-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-}
-
 section,
-p,
-.row {
+p {
   margin: 0 auto;
-  max-width: 60em;
-}
-
-article {
-  background-color: var(--base-bg);
-  border-radius: 1em;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  padding: 1em;
-}
-
-.threads {
-  padding: 1em;
-}
-
-.row {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
-  max-width: 60em;
+  max-width: 50em;
 }
 </style>

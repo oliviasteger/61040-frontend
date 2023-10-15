@@ -72,42 +72,16 @@ onBeforeMount(async () => {
         <EditScheduledMessageForm v-else :message="msg" @refreshMessages="getScheduledMessages" @editMessage="updateEditing" />
       </article>
     </section>
-    <p v-else-if="loaded">No messages sent</p>
+    <article v-else-if="loaded">No messages sent</article>
     <p v-else>Loading...</p>
   </section>
 </template>
 
 <style scoped>
-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-}
-
 section,
 p,
 .row {
   margin: 0 auto;
-  max-width: 60em;
-}
-
-article {
-  background-color: var(--base-bg);
-  border-radius: 1em;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  padding: 1em;
-}
-
-.posts {
-  padding: 1em;
-}
-
-.row {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
-  max-width: 60em;
+  max-width: 50em;
 }
 </style>

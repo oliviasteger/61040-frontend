@@ -32,10 +32,3 @@ async function login() {
     </fieldset>
   </form>
 </template>
-
-<style scoped>
-h3 {
-  display: flex;
-  justify-content: center;
-}
-</style>

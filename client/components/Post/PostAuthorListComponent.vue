@@ -35,50 +35,26 @@ onBeforeMount(async () => {
 
 <template>
   <section class="posts" v-if="loaded && posts.length !== 0">
-    <article v-for="post in posts" :key="post._id">
-      <PostComponent v-if="editing !== post._id" :post="post" @refreshPosts="getPostsByAuthor" @editPost="updateEditing" />
-      <EditPostForm v-else :post="post" @refreshPosts="getPostsByAuthor" @editPost="updateEditing" />
+    <div v-for="post in posts" :key="post._id">
+      <article>
+        <PostComponent v-if="editing !== post._id" :post="post" @refreshPosts="getPostsByAuthor" @editPost="updateEditing" />
+        <EditPostForm v-else :post="post" @refreshPosts="getPostsByAuthor" @editPost="updateEditing" />
+      </article>
       <div class="feedback">
         <ReactionComponent :post="post" />
         <ThreadListComponent :post="post" />
       </div>
-    </article>
+    </div>
   </section>
   <p v-else-if="loaded">No posts found</p>
   <p v-else>Loading...</p>
 </template>
 
 <style scoped>
-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-}
-
 section,
 p,
 .row {
   margin: 0 auto;
-  max-width: 60em;
-}
-
-article {
-  background-color: var(--base-bg);
-  border-radius: 1em;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  padding: 1em;
-}
-
-.posts {
-  padding: 1em;
-}
-
-.row {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
-  max-width: 60em;
+  max-width: 50em;
 }
 </style>

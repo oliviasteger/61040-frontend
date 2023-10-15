@@ -48,8 +48,10 @@ watch(props, async (newProps) => {
   <section v-if="isLoggedIn">
     <br />
     <section v-if="loaded && profile">
-      <ProfileComponent v-if="editing !== profile._id" :profile="profile" @refreshProfile="getProfile" @editProfile="updateProfile" />
-      <EditProfileForm v-else :profile="profile" @refreshProfile="getProfile" @editProfile="updateProfile" />
+      <article>
+        <ProfileComponent v-if="editing !== profile._id" :profile="profile" @refreshProfile="getProfile" @editProfile="updateProfile" />
+        <EditProfileForm v-else :profile="profile" @refreshProfile="getProfile" @editProfile="updateProfile" />
+      </article>
       <FriendComponentWrapper v-if="currentUsername !== username" :user="username" />
       <PostAuthorListComponent :author="username" />
     </section>
@@ -58,36 +60,10 @@ watch(props, async (newProps) => {
 </template>
 
 <style scoped>
-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-}
-
 section,
 p,
 .row {
   margin: 0 auto;
-  max-width: 60em;
-}
-
-article {
-  background-color: var(--base-bg);
-  border-radius: 1em;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  padding: 1em;
-}
-
-.posts {
-  padding: 1em;
-}
-
-.row {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
-  max-width: 60em;
+  max-width: 50em;
 }
 </style>

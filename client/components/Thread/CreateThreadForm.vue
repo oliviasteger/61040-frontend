@@ -31,44 +31,8 @@ const emptyForm = () => {
 </script>
 
 <template>
-  <div class="thread">
-    <form @submit.prevent="createThread(text)">
-      <textarea id="text" v-model="text" placeholder="Create a thread!" required> </textarea>
-      <button type="submit" class="pure-button-primary pure-button">Create Thread</button>
-    </form>
-  </div>
+  <form @submit.prevent="createThread(text)">
+    <textarea id="text" v-model="text" placeholder="Create a thread!" required> </textarea>
+    <button type="submit" class="pure-button-primary pure-button">Create Thread</button>
+  </form>
 </template>
-
-<style scoped>
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  padding: 1em;
-}
-
-textarea {
-  font-family: inherit;
-  font-size: inherit;
-  height: 6em;
-  padding: 0.5em;
-  border-radius: 4px;
-  resize: none;
-}
-
-input[type="text"] {
-  font-family: inherit;
-  font-size: inherit;
-  padding: 0.5em;
-  border-radius: 4px;
-  resize: none;
-  border: 1px solid black;
-}
-
-.thread {
-  background-color: #fff;
-  padding: 1em;
-  border-radius: 1em;
-  margin-bottom: 1em;
-}
-</style>

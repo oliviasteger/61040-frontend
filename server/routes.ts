@@ -330,16 +330,11 @@ class Routes {
     return await Friend.rejectRequest(fromId, user);
   }
 
-  @Router.get("/announcements/")
-  async getAnnouncements(session: WebSessionDoc) {
+  @Router.get("/announcements")
+  async getAnnouncement(session: WebSessionDoc) {
     const user = WebSession.getUser(session);
-    return await Announcement.getAnnouncementsByUser(user);
-  }
-
-  @Router.post("/announcements/")
-  async createAnnouncement(session: WebSessionDoc, body: string) {
-    const user = WebSession.getUser(session);
-    return await Announcement.create(user, body);
+    const month = new Date().getMonth();
+    return await Announcement.getAnnouncement(user, month);
   }
 
   @Router.patch("/profiles")
@@ -355,13 +350,7 @@ class Routes {
     return await Responses.profile(profile);
   }
 
-  @Router.get("/recaps/")
-  async getRecaps(session: WebSessionDoc) {
-    const user = WebSession.getUser(session);
-    return await Recap.getRecaps(user);
-  }
-
-  @Router.post("/recaps/")
+  @Router.post("/recaps")
   async createRecap(session: WebSessionDoc) {
     const user = WebSession.getUser(session);
     const interactions: Map<string, number> = new Map();
@@ -421,7 +410,8 @@ class Routes {
       .filter((x) => x.toString() != user.id.toString());
     const numSlots = Math.min(3, interactionsDescending.length % 2 == 0 ? interactionsDescending.length / 2 : (interactionsDescending.length - 1) / 2);
 
-    return await Recap.create(user, numPost, numThread, numReaction, interactionsDescending.slice(0, numSlots), interactionsDescending.slice(-1 * numSlots));
+    const recap = await Recap.create(user, numPost, numThread, numReaction, interactionsDescending.slice(0, numSlots), interactionsDescending.slice(-1 * numSlots));
+    if (recap.recap !== null) return await Responses.recap(recap.recap);
   }
 
   @Router.get("/scheduledmessages/received")

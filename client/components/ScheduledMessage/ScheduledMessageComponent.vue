@@ -28,8 +28,7 @@ const deleteMessage = async () => {
       <span v-if="i < props.message.recipients.length - 1">, </span>
     </span>
   </p>
-  <p class="title">{{ props.message.title }}</p>
-  <p>{{ props.status == "editable" ? "Sending at: " : "Sent at: " }} {{ formatDate(props.message.scheduledTime) }}</p>
+  <p class="message-title">{{ props.message.title }}</p>
 
   <section v-for="(c, i) in props.message.content" :key="'content' + i">
     <img v-if="'imageUrl' in c" :src="c.imageUrl" />
@@ -40,47 +39,9 @@ const deleteMessage = async () => {
       <li><button class="btn-small pure-button" @click="emit('editMessage', props.message._id)">Edit</button></li>
       <li><button class="button-error btn-small pure-button" @click="deleteMessage">Delete</button></li>
     </menu>
+    <article class="timestamp">
+      <p v-if="props.status == 'editable'">Scheduled to send at: {{ formatDate(props.message.scheduledTime) }}</p>
+      <p v-else>Sent at: {{ formatDate(props.message.scheduledTime) }}</p>
+    </article>
   </div>
 </template>
-
-<style scoped>
-p {
-  margin: 0em;
-}
-
-.author,
-.title {
-  font-weight: bold;
-  font-size: 1.2em;
-}
-
-menu {
-  list-style-type: none;
-  display: flex;
-  flex-direction: row;
-  gap: 1em;
-  padding: 0;
-  margin: 0;
-}
-
-img {
-  max-width: 100%;
-}
-
-.timestamp {
-  display: flex;
-  justify-content: flex-end;
-  font-size: 0.9em;
-  font-style: italic;
-}
-
-.base {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.base article:only-child {
-  margin-left: auto;
-}
-</style>

@@ -53,76 +53,27 @@ async function deleteFriend() {
 </script>
 
 <template>
-  <div v-if="status == 'none'">
+  <article v-if="status == 'none'">
     <p v-if="user !== undefined">Send friend request to {{ props.user }}</p>
     <form @submit.prevent="sendRequest(userInput, phone)">
       <label for="username">User to send friend request to: <input type="text" v-model="userInput" :disabled="user !== undefined" required /></label>
       <label for="phone"> Last 4 digits of phone number: <input type="tel" maxlength="4" v-model="phone" placeholder="..." required /></label>
       <button type="submit" class="button-success btn-small pure-button">Send</button>
     </form>
-  </div>
-  <div v-else-if="status === 'sent'">
+  </article>
+  <article v-else-if="status === 'sent'">
     <p>Sent friend request to {{ props.user }}</p>
     <menu><button class="button-error btn-small pure-button" @click="deleteRequest()">Delete</button></menu>
-  </div>
-  <div v-else-if="status == 'received'">
+  </article>
+  <article v-else-if="status == 'received'">
     <span>Received friend request from {{ props.user }}</span>
     <menu
       ><li><button class="button-success btn-small pure-button" @click="acceptRequest()">Accept</button></li>
       <li><button class="button-error btn-small pure-button" @click="rejectRequest()">Reject</button></li></menu
     >
-  </div>
-  <div v-else>
+  </article>
+  <article v-else>
     <span>Friends with {{ props.user }}</span>
     <menu><button class="button-error btn-small pure-button" @click="deleteFriend()">Delete</button></menu>
-  </div>
+  </article>
 </template>
-
-<style scoped>
-menu {
-  list-style-type: none;
-  display: flex;
-  flex-direction: row;
-  gap: 1em;
-  padding: 0;
-  margin: 0;
-}
-
-div {
-  background-color: var(--base-bg);
-  border-radius: 1em;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  padding: 1em;
-}
-
-form {
-  background-color: var(--base-bg);
-  border-radius: 1em;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  padding: 1em;
-  margin: 10px;
-}
-
-textarea {
-  font-family: inherit;
-  font-size: inherit;
-  height: 6em;
-  padding: 0.5em;
-  border-radius: 4px;
-  resize: none;
-}
-
-input[type="text"],
-input[type="tel"] {
-  font-family: inherit;
-  font-size: inherit;
-  padding: 0.5em;
-  border-radius: 4px;
-  resize: none;
-  border: 1px solid black;
-}
-</style>

@@ -9,7 +9,7 @@ const emit = defineEmits(["editThread", "refreshThreads"]);
 
 const editThread = async (content: string) => {
   try {
-    await fetchy(`api/threads/${props.thread._id}`, "PATCH", { body: { update: { content: content } } });
+    await fetchy(`/api/threads/${props.thread._id}`, "PATCH", { body: { update: { content: content } } });
   } catch (e) {
     return;
   }

@@ -9,13 +9,13 @@ const props = defineProps(["post", "thread"]);
 const createThread = async (content: string) => {
   if (props.post) {
     try {
-      await fetchy(`api/posts/${props.post._id}/threads`, "POST", { body: { root: props.post._id, content: content } });
+      await fetchy(`/api/posts/${props.post._id}/threads`, "POST", { body: { root: props.post._id, content: content } });
     } catch (_) {
       return;
     }
   } else if (props.thread) {
     try {
-      await fetchy(`api/posts/${props.thread.root}/threads`, "POST", { body: { root: props.thread.root, target: props.thread._id, content: content } });
+      await fetchy(`/api/posts/${props.thread.root}/threads`, "POST", { body: { root: props.thread.root, target: props.thread._id, content: content } });
     } catch (_) {
       return;
     }

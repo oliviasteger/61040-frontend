@@ -13,7 +13,7 @@ const createPost = async (content: string | null, image: string | null, tagged: 
     .split(",")
     .filter((x) => x.length !== 0);
   try {
-    await fetchy("api/posts", "POST", {
+    await fetchy("/api/posts", "POST", {
       body: { content: content, image: image, tagged: taggedParsed },
     });
   } catch (_) {

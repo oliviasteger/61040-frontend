@@ -10,7 +10,7 @@ const { currentUsername } = storeToRefs(useUserStore());
 
 const deleteThread = async () => {
   try {
-    await fetchy(`api/threads/${props.thread._id}`, "DELETE");
+    await fetchy(`/api/threads/${props.thread._id}`, "DELETE");
   } catch {
     return;
   }

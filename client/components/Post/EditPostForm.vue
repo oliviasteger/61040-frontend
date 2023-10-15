@@ -15,7 +15,7 @@ const editPost = async (content: string | null, image: string | null, tagged: st
     .split(",")
     .filter((x) => x.length !== 0);
   try {
-    await fetchy(`api/posts/${props.post._id}`, "PATCH", { body: { update: { content: content, image: image, tagged: taggedParsed } } });
+    await fetchy(`/api/posts/${props.post._id}`, "PATCH", { body: { update: { content: content, image: image, tagged: taggedParsed } } });
   } catch (e) {
     return;
   }

@@ -10,7 +10,7 @@ const emit = defineEmits(["editProfile", "refreshProfile"]);
 
 const editProfile = async (name: string, details: string) => {
   try {
-    await fetchy(`api/profiles`, "PATCH", { body: { update: { name: name, details: details } } });
+    await fetchy(`/api/profiles`, "PATCH", { body: { update: { name: name, details: details } } });
   } catch (e) {
     return;
   }

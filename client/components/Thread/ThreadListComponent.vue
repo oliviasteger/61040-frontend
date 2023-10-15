@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { fetchy } from "@/utils/fetchy";
-import { onBeforeMount, ref } from "vue";
 import ReactionComponent from "@/components/Reaction/ReactionComponent.vue";
 import CreateThreadForm from "@/components/Thread/CreateThreadForm.vue";
 import EditThreadForm from "@/components/Thread/EditThreadForm.vue";
 import ThreadComponent from "@/components/Thread/ThreadComponent.vue";
+import { fetchy } from "@/utils/fetchy";
+import { onBeforeMount, ref } from "vue";
 
 const props = defineProps(["post", "thread"]);
 const loaded = ref(false);
@@ -15,13 +15,13 @@ async function getThreads() {
   let threadResults;
   if (props.post) {
     try {
-      threadResults = await fetchy(`api/posts/${props.post._id}/threads`, "GET");
+      threadResults = await fetchy(`/api/posts/${props.post._id}/threads`, "GET");
     } catch (_) {
       return;
     }
   } else if (props.thread) {
     try {
-      threadResults = await fetchy(`api/threads/${props.thread._id}/threads`, "GET");
+      threadResults = await fetchy(`/api/threads/${props.thread._id}/threads`, "GET");
     } catch (_) {
       return;
     }

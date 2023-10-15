@@ -18,13 +18,13 @@ async function getReactions() {
   let fetchedReactions: { user: string; content: string; target: string }[];
   if (props.post) {
     try {
-      fetchedReactions = await fetchy(`api/posts/${props.post._id}/reactions`, "GET");
+      fetchedReactions = await fetchy(`/api/posts/${props.post._id}/reactions`, "GET");
     } catch {
       return;
     }
   } else {
     try {
-      fetchedReactions = await fetchy(`api/threads/${props.thread._id}/reactions`, "GET");
+      fetchedReactions = await fetchy(`/api/threads/${props.thread._id}/reactions`, "GET");
     } catch {
       return;
     }
@@ -46,13 +46,13 @@ async function getReactions() {
 const deleteReaction = async () => {
   if (props.post) {
     try {
-      await fetchy(`api/posts/${props.post._id}/reactions`, "DELETE");
+      await fetchy(`/api/posts/${props.post._id}/reactions`, "DELETE");
     } catch {
       return;
     }
   } else if (props.thread) {
     try {
-      await fetchy(`api/threads/${props.thread._id}/reactions`, "DELETE");
+      await fetchy(`/api/threads/${props.thread._id}/reactions`, "DELETE");
     } catch {
       return;
     }
@@ -64,13 +64,13 @@ const deleteReaction = async () => {
 const createReaction = async (content: string) => {
   if (props.post) {
     try {
-      await fetchy(`api/posts/${props.post._id}/reactions`, "POST", { body: { content } });
+      await fetchy(`/api/posts/${props.post._id}/reactions`, "POST", { body: { content } });
     } catch {
       return;
     }
   } else if (props.thread) {
     try {
-      await fetchy(`api/threads/${props.thread._id}/reactions`, "POST", { body: { content } });
+      await fetchy(`/api/threads/${props.thread._id}/reactions`, "POST", { body: { content } });
     } catch {
       return;
     }
@@ -82,13 +82,13 @@ const createReaction = async (content: string) => {
 const editReaction = async (content: string) => {
   if (props.post) {
     try {
-      await fetchy(`api/posts/${props.post._id}/reactions`, "PATCH", { body: { update: { content } } });
+      await fetchy(`/api/posts/${props.post._id}/reactions`, "PATCH", { body: { update: { content } } });
     } catch {
       return;
     }
   } else if (props.thread) {
     try {
-      await fetchy(`api/threads/${props.thread._id}/reactions`, "PATCH", { body: { update: { content } } });
+      await fetchy(`/api/threads/${props.thread._id}/reactions`, "PATCH", { body: { update: { content } } });
     } catch {
       return;
     }

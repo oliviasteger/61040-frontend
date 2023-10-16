@@ -54,27 +54,47 @@ async function deleteFriend() {
 
 <template>
   <article v-if="status == 'none'">
-    <p v-if="user !== undefined">Send friend request to {{ props.user }}</p>
-    <form @submit.prevent="sendRequest(userInput, phone)">
+    <p v-if="user !== undefined">
+      Send friend request to <router-link :to="{ name: 'Profile', params: { username: props.user } }">{{ props.user }}</router-link>
+    </p>
+    <form @submit.prevent="sendRequest(userInput, phone)" class="pure-form pure-form-aligned">
       <h3>Send a friend request</h3>
-      <label for="username">User to send friend request to: <input type="text" v-model="userInput" :disabled="user !== undefined" required /></label>
-      <label for="phone"> Last 4 digits of phone number: <input type="tel" maxlength="4" v-model="phone" placeholder="..." required /></label>
+      <fieldset>
+        <div class="pure-control-group"><label for="username">User to send friend request to: </label><input type="text" v-model="userInput" :disabled="user !== undefined" required /></div>
+      </fieldset>
+      <fieldset>
+        <div class="pure-control-group"><label for="phone"> Last 4 digits of phone number: </label><input type="tel" maxlength="4" v-model="phone" placeholder="..." required /></div>
+      </fieldset>
       <button type="submit" class="button-success pure-button">Send</button>
     </form>
   </article>
   <article v-else-if="status === 'sent'">
-    <p>Sent friend request to {{ props.user }}</p>
-    <button class="button-error pure-button" @click="deleteRequest()">Delete</button>
+    <div class="base">
+      <p>
+        Friend request to <router-link :to="{ name: 'Profile', params: { username: props.user } }">{{ props.user }}</router-link>
+      </p>
+      <menu>
+        <button class="button-error pure-button" @click="deleteRequest()">Delete</button>
+      </menu>
+    </div>
   </article>
   <article v-else-if="status == 'received'">
-    <span>Received friend request from {{ props.user }}</span>
-    <menu
-      ><li><button class="button-success pure-button" @click="acceptRequest()">Accept</button></li>
-      <li><button class="button-error pure-button" @click="rejectRequest()">Reject</button></li></menu
-    >
+    <div class="base">
+      <span
+        >Friend request from <router-link :to="{ name: 'Profile', params: { username: props.user } }">{{ props.user }}</router-link></span
+      >
+      <menu
+        ><li><button class="button-success pure-button" @click="acceptRequest()">Accept</button></li>
+        <li><button class="button-error pure-button" @click="rejectRequest()">Reject</button></li></menu
+      >
+    </div>
   </article>
   <article v-else>
-    <span>Friends with {{ props.user }}</span>
-    <menu><button class="button-error pure-button" @click="deleteFriend()">Delete</button></menu>
+    <div class="base">
+      <span
+        >Friends with <router-link :to="{ name: 'Profile', params: { username: props.user } }">{{ props.user }}</router-link></span
+      >
+      <menu><button class="button-error pure-button" @click="deleteFriend()">Delete</button></menu>
+    </div>
   </article>
 </template>

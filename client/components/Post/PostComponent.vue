@@ -19,14 +19,14 @@ const deletePost = async () => {
 </script>
 
 <template>
-  <p class="author">
+  <span class="author">
     <router-link :to="{ name: 'Profile', params: { username: props.post.author } }">{{ props.post.author }}</router-link>
     {{ props.post.tagged.length !== 0 ? "with" : "" }}
     <span v-for="(n, i) in props.post.tagged" :key="i">
       <router-link :to="{ name: 'Profile', params: { username: n } }">{{ n }}</router-link>
       <span v-if="i < props.post.tagged.length - 1">, </span>
     </span>
-  </p>
+  </span>
   <p>{{ props.post.content }}</p>
   <img :src="post.image" />
   <div class="base">

@@ -48,8 +48,8 @@ onBeforeMount(async () => {
     <AnnouncementComponent />
     <CreatePostForm @refreshPosts="getPosts" />
     <div class="row">
-      <h2 v-if="!searchAuthor">Posts:</h2>
-      <h2 v-else>Posts by {{ searchAuthor }}:</h2>
+      <h2 v-if="!searchAuthor">Posts</h2>
+      <h2 v-else>Posts by {{ searchAuthor }}</h2>
       <br />
     </div>
     <SearchPostForm @getPostsByAuthor="getPosts" />
@@ -65,7 +65,7 @@ onBeforeMount(async () => {
         </div>
       </div>
     </section>
-    <p v-else-if="loaded">No posts found</p>
+    <p v-else-if="loaded">No posts found!</p>
     <p v-else>Loading...</p>
   </section>
 </template>
@@ -75,6 +75,6 @@ section,
 p,
 .row {
   margin: 0 auto;
-  max-width: 50em;
+  width: 50em;
 }
 </style>

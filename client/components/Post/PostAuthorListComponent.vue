@@ -46,7 +46,7 @@ onBeforeMount(async () => {
       </div>
     </div>
   </section>
-  <p v-else-if="loaded">No posts found</p>
+  <p v-else-if="loaded">No posts found!</p>
   <p v-else>Loading...</p>
 </template>
 
@@ -55,6 +55,6 @@ section,
 p,
 .row {
   margin: 0 auto;
-  max-width: 50em;
+  width: 50em;
 }
 </style>

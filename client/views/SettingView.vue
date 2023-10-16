@@ -1,11 +1,8 @@
 <script setup lang="ts">
 import router from "@/router";
 import { useUserStore } from "@/stores/user";
-import { storeToRefs } from "pinia";
-import FriendManagerComponent from "../components/Friend/FriendManagerComponent.vue";
 import UpdateUserForm from "../components/Setting/UpdateUserForm.vue";
 
-const { currentUsername } = storeToRefs(useUserStore());
 const { logoutUser, deleteUser } = useUserStore();
 
 async function logout() {
@@ -21,12 +18,13 @@ async function delete_() {
 
 <template>
   <main class="column">
+    <br />
     <article>
-      <button class="pure-button pure-button-primary" @click="logout">Logout</button>
-      <button class="button-error pure-button" @click="delete_">Delete User</button>
+      <menu>
+        <button class="pure-button pure-button-primary" @click="logout">Logout</button>
+        <button class="button-error pure-button" @click="delete_">Delete User</button>
+      </menu>
     </article>
     <UpdateUserForm />
-
-    <FriendManagerComponent />
   </main>
 </template>

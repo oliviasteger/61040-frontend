@@ -36,7 +36,7 @@ const emptyForm = () => {
     <p>Select a post type:</p>
     <label for="image"> <input type="radio" name="type" id="image" value="Image" v-model="picked" required /> Image</label>
     <label for="content"> <input type="radio" name="type" id="content" value="Content" v-model="picked" required /> Content</label>
-    <textarea id="text" v-model="text" placeholder="Create a post!" required> </textarea>
+    <textarea id="text" v-model="text" :placeholder="picked === 'Content' ? 'Add some text!' : 'Add an image URL!'" required> </textarea>
     <input id="tagged" type="text" v-model="tagged" placeholder="Add tagged usernames!" />
     <button type="submit" class="pure-button-primary pure-button">Create Post</button>
   </form>

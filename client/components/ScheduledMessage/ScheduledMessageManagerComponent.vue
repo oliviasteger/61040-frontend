@@ -54,7 +54,7 @@ onBeforeMount(async () => {
         <ScheduledMessageComponent :message="msg" status="locked" @refreshMessages="getScheduledMessages" @editMessage="updateEditing" />
       </article>
     </section>
-    <p v-else-if="loaded">No messages received</p>
+    <p v-else-if="loaded">No messages received yet!</p>
     <p v-else>Loading...</p>
 
     <div class="row">
@@ -72,7 +72,7 @@ onBeforeMount(async () => {
         <EditScheduledMessageForm v-else :message="msg" @refreshMessages="getScheduledMessages" @editMessage="updateEditing" />
       </article>
     </section>
-    <article v-else-if="loaded">No messages sent</article>
+    <article v-else-if="loaded">No messages sent yet!</article>
     <p v-else>Loading...</p>
   </section>
 </template>
@@ -82,6 +82,6 @@ section,
 p,
 .row {
   margin: 0 auto;
-  max-width: 50em;
+  width: 50em;
 }
 </style>

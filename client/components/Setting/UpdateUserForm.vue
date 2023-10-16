@@ -28,27 +28,30 @@ async function updatePhone() {
 </script>
 
 <template>
-  <article>
-    <h3>Update user information</h3>
-    <form @submit.prevent="updateUsername" class="pure-form">
-      <menu>
-        <input type="text" placeholder="New username" v-model="username" required />
-        <button type="submit" class="pure-button pure-button-primary">Update username</button>
-      </menu>
-    </form>
+  <section>
+    <form>
+      <h3>Update user information</h3>
+      <form @submit.prevent="updateUsername" class="pure-form pure-form-aligned">
+        <menu>
+          <input type="text" placeholder="New username" v-model="username" required />
+          <button type="submit" class="pure-button pure-button-primary">Update username</button>
+        </menu>
+      </form>
 
-    <form @submit.prevent="updatePassword" class="pure-form">
-      <menu>
-        <input type="password" placeholder="New password" v-model="password" required />
-        <button type="submit" class="pure-button pure-button-primary">Update password</button>
-      </menu>
-    </form>
+      <form @submit.prevent="updatePassword" class="pure-form">
+        <menu>
+          <input type="password" placeholder="New password" v-model="password" required />
+          <button type="submit" class="pure-button pure-button-primary">Update password</button>
+        </menu>
+      </form>
 
-    <form @submit.prevent="updatePhone" class="pure-form">
-      <menu>
-        <input type="tel" placeholder="New phone number" v-model="phone" required />
-        <button type="submit" class="pure-button pure-button-primary">Update phone number</button>
-      </menu>
+      <form @submit.prevent="updatePhone" class="pure-form">
+        <menu>
+          <input type="tel" placeholder="New phone number" v-model="phone" required />
+          <button type="submit" class="pure-button pure-button-primary">Update phone number</button>
+        </menu>
+      </form>
     </form>
-  </article>
+  </section>
 </template>
+<style scoped></style>

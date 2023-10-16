@@ -64,6 +64,6 @@ section,
 p,
 .row {
   margin: 0 auto;
-  max-width: 50em;
+  width: 50em;
 }
 </style>

@@ -105,21 +105,23 @@ onBeforeMount(async () => {
 
 <template>
   <article>
-    <div class="reactions" v-if="loaded">
-      <span v-if="topReactions.length !== 0">
-        <span v-for="reaction in topReactions" :key="reaction">
-          <span> {{ reaction }} </span> <span> {{ tally[reaction] }} </span> &nbsp;
-        </span>
-      </span>
-      <span v-else> No reactions yet! </span>
-    </div>
     <div class="base">
-      <input type="text" v-model="content" placeholder="Add emoji reaction!" />
+      <div class="reactions" v-if="loaded">
+        <span v-if="topReactions.length !== 0">
+          <span v-for="(reaction, i) in topReactions" :key="reaction">
+            <span> {{ reaction }} </span> <span> {{ tally[reaction] }} </span>
+            <span v-if="i != topReactions.length - 1"> &nbsp; </span>
+          </span>
+        </span>
+        <span v-else> No reactions yet! </span>
+      </div>
       <menu v-if="reactions.filter((reaction) => reaction.user === currentUsername).length !== 0">
-        <li><button class="pure-button" @click="editReaction(content)">Update Reaction</button></li>
+        <input class="emoji-input" type="text" v-model="content" placeholder="Add an emoji!" />
+        <li><button class="pure-button" @click="editReaction(content)">Update</button></li>
         <li><button class="button-error pure-button" @click="deleteReaction">Delete</button></li>
       </menu>
       <menu v-if="reactions.filter((reaction) => reaction.user === currentUsername).length === 0">
+        <input class="emoji-input" type="text" v-model="content" placeholder="Add an emoji!" />
         <li><button class="pure-button" @click="createReaction(content)">React</button></li>
       </menu>
     </div>

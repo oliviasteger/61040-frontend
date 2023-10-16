@@ -24,7 +24,7 @@ a {
 
 button.pure-button {
   background-color: var(--yellow);
-  color: var(--dark-brown);
+  color: var(--text-color);
 }
 
 button.button-error {
@@ -62,6 +62,11 @@ a.button {
 h3 {
   display: flex;
   justify-content: center;
+  border-radius: 4px;
+  padding: 1em;
+  margin: 0em;
+  background-color: var(--accent-bg);
+  color: var(--dark-brown);
 }
 
 p {
@@ -119,6 +124,18 @@ article {
   margin: 1em 0em 1em 0em;
 }
 
+article.inverse-article {
+  background-color: var(--accent-bg);
+  color: var(--dark-brown);
+  margin: 0em;
+  border-radius: 4px;
+}
+
+article.inverse-article textarea {
+  background-color: var(--dark-brown);
+  color: var(--accent-bg);
+}
+
 .timestamp {
   display: flex;
   justify-content: flex-end;
@@ -144,6 +161,10 @@ article {
 .author {
   font-weight: bold;
   font-size: 1.2em;
+  padding: 1em;
+  border-radius: 4px;
+  background-color: var(--accent-bg);
+  color: var(--dark-brown);
 }
 
 .message-title {
@@ -168,6 +189,23 @@ section {
   gap: 1em;
 }
 
+section.scheduled-message-section {
+  gap: 0em;
+}
+
+img {
+  margin: 0em;
+  border-radius: 4px;
+}
+
+section.scheduled-message-section p {
+  background-color: var(--accent-bg);
+  color: var(--dark-brown);
+  margin: 0em;
+  border-radius: 4px;
+  padding: 1em;
+}
+
 body {
   padding-bottom: 2em;
 }
@@ -183,8 +221,15 @@ body {
   color: var(--dark-brown);
   border-radius: 1em;
   margin-bottom: 1em;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0px;
 }
 
 .feedback {
   padding: 1em;
+}
+
+input.emoji-input {
+  width: 7.5em;
 }

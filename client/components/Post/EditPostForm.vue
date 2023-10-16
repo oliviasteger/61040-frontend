@@ -29,11 +29,11 @@ const editPost = async (content: string | null, image: string | null, tagged: st
 
 <template>
   <form @submit.prevent="editPost(picked === 'Content' ? text : null, picked === 'Image' ? text : null, tagged === '' ? null : tagged)">
-    <p class="author">{{ props.post.author }} {{ props.post.tagged.length !== 0 ? "with" : "" }} {{ props.post.tagged.join(", ") }}</p>
+    <span class="author">{{ props.post.author }} {{ props.post.tagged.length !== 0 ? "with" : "" }} {{ props.post.tagged.join(", ") }}</span>
     <p>Select a post type:</p>
     <label for="image"> <input type="radio" name="type" id="image" value="Image" v-model="picked" required /> Image</label>
     <label for="content"> <input type="radio" name="type" id="content" value="Content" v-model="picked" required /> Content</label>
-    <textarea id="text" v-model="text" placeholder="Create a post!" required> </textarea>
+    <textarea id="text" v-model="text" :placeholder="picked === 'Content' ? 'Add some text!' : 'Add an image URL!'" required> </textarea>
     <input id="tagged" type="text" v-model="tagged" placeholder="Add tagged usernames!" />
     <div class="base">
       <menu>

@@ -21,7 +21,7 @@ const editProfile = async (name: string, details: string) => {
 
 <template>
   <form @submit.prevent="editProfile(name, details)">
-    <p class="author">{{ props.profile.user }}</p>
+    <span class="author">{{ props.profile.user }}</span>
     <input id="name" type="text" v-model="name" placeholder="Add a display name!" />
     <textarea id="details" v-model="details" placeholder="Add some details about yourself!" required> </textarea>
     <div class="base">

@@ -77,31 +77,33 @@ onBeforeMount(async () => {
       <h2>Friends</h2>
     </div>
     <section class="list" v-if="loaded && friends.length !== 0">
-      <article v-for="friend in friends" :key="friend">
+      <div v-for="friend in friends" :key="friend">
         <FriendComponent @refreshFriends="getFriendData" :user="friend" :status="'friend'" />
-      </article>
+      </div>
     </section>
-    <article v-else-if="loaded"><p>No friends found</p></article>
+    <article v-else-if="loaded"><p>No friends found!</p></article>
     <article v-else><p>Loading...</p></article>
     <div class="row">
       <h2>Received requests</h2>
     </div>
     <section class="list" v-if="loaded && received.length !== 0">
-      <article v-for="request in received" :key="request._id">
+      <div v-for="request in received" :key="request._id">
         <FriendComponent @refreshFriends="getFriendData" :user="request.from" :status="'received'" />
-      </article>
+      </div>
     </section>
-    <article v-else-if="loaded"><p>No received requests found</p></article>
+    <article v-else-if="loaded"><p>No received friend requests found!</p></article>
     <article v-else><p>Loading...</p></article>
     <div class="row">
       <h2>Sent requests</h2>
     </div>
     <section class="list" v-if="loaded && sent.length !== 0">
-      <article v-for="request in sent" :key="request._id">
+      <div v-for="request in sent" :key="request._id">
         <FriendComponent @refreshFriends="getFriendData" :user="request.from" :status="'sent'" />
-      </article>
+      </div>
     </section>
-    <article v-else-if="loaded"><p>No sent requests found</p></article>
+    <article v-else-if="loaded"><p>No sent friend requests found!</p></article>
     <article v-else><p>Loading...</p></article>
   </section>
 </template>
+
+<style scoped></style>

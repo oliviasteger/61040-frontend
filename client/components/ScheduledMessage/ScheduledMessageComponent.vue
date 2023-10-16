@@ -19,7 +19,7 @@ const deleteMessage = async () => {
 </script>
 
 <template>
-  <p class="author">
+  <span>
     <span>From: </span><router-link :to="{ name: 'Profile', params: { username: props.message.user } }">{{ props.message.user }}</router-link>
     <br />
     <span>To: </span>
@@ -27,12 +27,11 @@ const deleteMessage = async () => {
       <router-link :to="{ name: 'Profile', params: { username: n } }">{{ n }}</router-link>
       <span v-if="i < props.message.recipients.length - 1">, </span>
     </span>
-  </p>
+  </span>
   <p class="message-title">{{ props.message.title }}</p>
-
-  <section v-for="(c, i) in props.message.content" :key="'content' + i">
-    <img v-if="'imageUrl' in c" :src="c.imageUrl" />
-    <p v-if="'content' in c">{{ c.content }}</p>
+  <section class="scheduled-message-section" v-for="(c, i) in props.message.content" :key="'content' + i">
+    <img v-if="'imageUrl' in c && c.imageUrl != null" :src="c.imageUrl" />
+    <p v-else-if="'content' in c && c.content != null">{{ c.content }}</p>
   </section>
   <div class="base">
     <menu v-if="props.message.user == currentUsername && props.status == 'editable'">

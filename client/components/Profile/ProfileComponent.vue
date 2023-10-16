@@ -9,7 +9,7 @@ const { currentUsername } = storeToRefs(useUserStore());
 </script>
 
 <template>
-  <p class="author">{{ props.profile.user }}</p>
+  <span class="author">{{ props.profile.user }}</span>
   <p>Display name: {{ props.profile.name }}</p>
   <p>Display details: {{ props.profile.details }}</p>
   <div class="base">

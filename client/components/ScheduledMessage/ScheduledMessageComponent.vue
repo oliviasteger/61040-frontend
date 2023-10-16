@@ -36,8 +36,8 @@ const deleteMessage = async () => {
   </section>
   <div class="base">
     <menu v-if="props.message.user == currentUsername && props.status == 'editable'">
-      <li><button class="btn-small pure-button" @click="emit('editMessage', props.message._id)">Edit</button></li>
-      <li><button class="button-error btn-small pure-button" @click="deleteMessage">Delete</button></li>
+      <li><button class="pure-button" @click="emit('editMessage', props.message._id)">Edit</button></li>
+      <li><button class="button-error pure-button" @click="deleteMessage">Delete</button></li>
     </menu>
     <article class="timestamp">
       <p v-if="props.status == 'editable'">Scheduled to send at: {{ formatDate(props.message.scheduledTime) }}</p>

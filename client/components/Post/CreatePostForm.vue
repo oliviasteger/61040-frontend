@@ -32,7 +32,7 @@ const emptyForm = () => {
 
 <template>
   <form @submit.prevent="createPost(picked === 'Content' ? text : null, picked === 'Image' ? text : null, tagged)">
-    <h2>Create a post</h2>
+    <h3>Create a post</h3>
     <p>Select a post type:</p>
     <label for="image"> <input type="radio" name="type" id="image" value="Image" v-model="picked" required /> Image</label>
     <label for="content"> <input type="radio" name="type" id="content" value="Content" v-model="picked" required /> Content</label>

@@ -3,24 +3,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root {
-  --red: rgb(208, 67, 12);
-  --green: rgb(28, 184, 65);
-  --base-bg: #f1f3f5;
-  --accent-bg: #fff;
+  --red: #a74a43;
+  --green: #417B5A;
+  --blue: #7180AC;
+  --yellow: #c38d4f;
+  --dark-brown: #38322c;
+  --accent-bg: #ece7df;
+  --text-color: #ece7df;
 }
 
-button.btn-small {
-  font-size: 80%;
+body {
+  background: var(--text-color);
+  color: var(--dark-brown);
+  font-family: 'Libre Baskerville', serif;
+}
+
+a {
+  color: var(--blue);
+}
+
+button.pure-button {
+  background-color: var(--yellow);
+  color: var(--dark-brown);
 }
 
 button.button-error {
-  color: white;
+  color: var(--text-color);
   background: var(--red);
 }
 
 button.button-success {
-  color: white;
+  color: var(--text-color);
   background: var(--green);
+}
+
+button.pure-button-primary {
+  color: var(--text-color);
+  background: var(--blue);
 }
 
 a.button {
@@ -47,6 +66,7 @@ h3 {
 
 p {
   margin: 0em;
+  line-height: 2;
 }
 
 menu {
@@ -60,13 +80,17 @@ menu {
 
 input[type="text"],
 input[type="tel"], 
+input[type="date"],
+input[type="password"],
 textarea {
+  background-color: var(--accent-bg);
+  color: var(--dark-brown);
   font-family: inherit;
   font-size: inherit;
   padding: 0.5em;
   border-radius: 4px;
   resize: none;
-  border: 1px solid black;
+  border: 0px;
 }
 
 textarea {
@@ -74,7 +98,8 @@ textarea {
 }
 
 form {
-  background-color: var(--base-bg);
+  background-color: var(--dark-brown);
+  color: var(--accent-bg);
   border-radius: 1em;
   display: flex;
   flex-direction: column;
@@ -84,7 +109,8 @@ form {
 
 
 article {
-  background-color: var(--base-bg);
+  background-color: var(--dark-brown);
+  color: var(--accent-bg);
   border-radius: 1em;
   display: flex;
   flex-direction: column;
@@ -98,6 +124,7 @@ article {
   justify-content: flex-end;
   font-size: 0.9em;
   font-style: italic;
+  margin: 0px;
 }
 
 .base {
@@ -108,6 +135,10 @@ article {
 
 .base article:only-child {
   margin-left: auto;
+}
+
+.search {
+  justify-content: center;
 }
 
 .author {
@@ -149,6 +180,7 @@ body {
   text-align: center;
   padding: 1em;
   background-color: var(--accent-bg);
+  color: var(--dark-brown);
   border-radius: 1em;
   margin-bottom: 1em;
 }

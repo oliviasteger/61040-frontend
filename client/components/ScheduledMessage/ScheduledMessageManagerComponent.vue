@@ -44,10 +44,10 @@ onBeforeMount(async () => {
 
 <template>
   <section v-if="isLoggedIn">
-    <h2>Create a scheduled message:</h2>
+    <br />
     <CreateScheduledMessageForm @refreshMessages="getScheduledMessages" />
     <div class="row">
-      <h2>Received Messages:</h2>
+      <h2>Received messages</h2>
     </div>
     <section class="received" v-if="loaded && received.length !== 0">
       <article v-for="msg in received" :key="msg._id">
@@ -58,7 +58,7 @@ onBeforeMount(async () => {
     <p v-else>Loading...</p>
 
     <div class="row">
-      <h2>Sent Messages:</h2>
+      <h2>Sent messages</h2>
     </div>
     <section class="sent" v-if="loaded && sent.length !== 0">
       <article v-for="msg in sent" :key="msg._id">

@@ -21,18 +21,18 @@ onBeforeMount(async () => {
 
 <template>
   <article v-if="loaded">
-    <h3>Monthly recap</h3>
+    <h3>Activity recap</h3>
     <p>
-      ✉️ You had <b>{{ recap.numPost }} {{ recap.numPost == "1" ? "post" : "posts" }}</b> this month!
+      ✉️ &nbsp; You had <b>{{ recap.numPost }} {{ recap.numPost == "1" ? "post" : "posts" }}</b> this month!
     </p>
     <p>
-      💬 You wrote <b> {{ recap.numThread }} {{ recap.numThread == "1" ? "comment" : "comments" }}</b> this month!
+      💬 &nbsp; You wrote <b> {{ recap.numThread }} {{ recap.numThread == "1" ? "comment" : "comments" }}</b> this month!
     </p>
     <p>
-      🙂 You're on a roll with <b> {{ recap.numReaction }} {{ recap.numReaction == "1" ? "reaction" : "reactions" }}</b> this month!
+      🙂 &nbsp; You're on a roll with <b> {{ recap.numReaction }} {{ recap.numReaction == "1" ? "reaction" : "reactions" }}</b> this month!
     </p>
     <p>
-      👥 You've interacted with
+      👥 &nbsp; You've interacted with
       <span v-for="(n, i) in recap.mostInteractedWith" :key="i">
         <router-link :to="{ name: 'Profile', params: { username: n } }">{{ n }}</router-link>
         <span v-if="i < recap.mostInteractedWith.length - 2">, </span>
@@ -42,7 +42,7 @@ onBeforeMount(async () => {
       the most this month!
     </p>
     <p>
-      👥 You haven't interacted with
+      👥 &nbsp; You haven't interacted with
       <span v-for="(n, i) in recap.leastInteractedWith" :key="i">
         <router-link :to="{ name: 'Profile', params: { username: n } }">{{ n }}</router-link>
         <span v-if="i < recap.leastInteractedWith.length - 2">, </span>

@@ -14,7 +14,7 @@ const { currentUsername } = storeToRefs(useUserStore());
   <p>Display details: {{ props.profile.details }}</p>
   <div class="base">
     <menu v-if="props.profile.user == currentUsername">
-      <li><button class="btn-small pure-button" @click="emit('editProfile', props.profile._id)">Edit</button></li>
+      <li><button class="pure-button" @click="emit('editProfile', props.profile._id)">Edit</button></li>
     </menu>
     <article class="timestamp">
       <p v-if="props.profile.dateCreated !== props.profile.dateUpdated">Edited on: {{ formatDate(props.profile.dateUpdated) }}</p>

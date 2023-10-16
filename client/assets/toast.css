@@ -1,19 +1,19 @@
 .toast {
   position: fixed;
-  top: 1em;
+  top: 2em;
   left: 50%;
   transform: translate(-50%, 0);
-  padding: 0.5em 1em;
+  padding: 1em;
   border-radius: 6px;
   max-width: 60em;
   margin: 0 auto;
 
-  color: #fff;
+  color: #ece7df;
 }
 
 .error {
-  background-color: #fa5252;
+  background-color: #a74a43;
 }
 .success {
-  background-color: #40c057;
+  background-color: #417B5A;
 }

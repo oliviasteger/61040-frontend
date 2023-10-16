@@ -26,8 +26,8 @@ const editProfile = async (name: string, details: string) => {
     <textarea id="details" v-model="details" placeholder="Add some details about yourself!" required> </textarea>
     <div class="base">
       <menu>
-        <li><button class="btn-small pure-button-primary pure-button" type="submit">Save</button></li>
-        <li><button class="btn-small pure-button" @click="emit('editProfile')">Cancel</button></li>
+        <li><button class="pure-button-primary pure-button" type="submit">Save</button></li>
+        <li><button class="pure-button" @click="emit('editProfile')">Cancel</button></li>
       </menu>
       <p v-if="props.profile.dateCreated !== props.profile.dateUpdated" class="timestamp">Edited on: {{ formatDate(props.profile.dateUpdated) }}</p>
       <p v-else class="timestamp">Created on: {{ formatDate(props.profile.dateCreated) }}</p>

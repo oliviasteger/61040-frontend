@@ -80,8 +80,8 @@ const removeContent = () => {
     <label for="time">Select send date: <input id="time" name="time" type="date" v-model="scheduledTime" required /></label>
     <div class="base">
       <menu>
-        <li><button class="btn-small pure-button-primary pure-button" type="submit">Save</button></li>
-        <li><button class="btn-small pure-button" @click="emit('editMessage')">Cancel</button></li>
+        <li><button class="pure-button-primary pure-button" type="submit">Save</button></li>
+        <li><button class="pure-button" @click="emit('editMessage')">Cancel</button></li>
       </menu>
       <p v-if="props.message.dateCreated !== props.message.dateUpdated" class="timestamp">Edited on: {{ formatDate(props.message.dateUpdated) }}</p>
       <p v-else class="timestamp">Created on: {{ formatDate(props.message.dateCreated) }}</p>

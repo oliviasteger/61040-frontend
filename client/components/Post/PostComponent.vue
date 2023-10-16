@@ -31,8 +31,8 @@ const deletePost = async () => {
   <img :src="post.image" />
   <div class="base">
     <menu v-if="props.post.author == currentUsername">
-      <li><button class="btn-small pure-button" @click="emit('editPost', props.post._id)">Edit</button></li>
-      <li><button class="button-error btn-small pure-button" @click="deletePost">Delete</button></li>
+      <li><button class="pure-button" @click="emit('editPost', props.post._id)">Edit</button></li>
+      <li><button class="button-error pure-button" @click="deletePost">Delete</button></li>
     </menu>
     <article class="timestamp">
       <p v-if="props.post.dateCreated !== props.post.dateUpdated">Edited on: {{ formatDate(props.post.dateUpdated) }}</p>

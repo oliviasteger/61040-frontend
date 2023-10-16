@@ -64,13 +64,14 @@ const emptyForm = () => {
 
 <template>
   <form @submit.prevent="createScheduledMessage(title, scheduledTime, content, recipients)">
+    <h3>Schedule a message</h3>
     <input id="title" type="text" v-model="title" placeholder="Add a message title!" />
     <article v-for="(entry, i) in content" :key="i">
       <p>Select content type:</p>
       <label :for="'image' + i"> <input type="radio" :name="'type' + i" :id="'image' + i" value="Image" v-model="entry.type" required /> Image</label><br />
       <label :for="'content' + i"> <input type="radio" :name="'type' + i" :id="'content' + i" value="Content" v-model="entry.type" required /> Text</label>
       <p></p>
-      <textarea :id="'text' + i" v-model="entry.text" placeholder="Create a post!" required> </textarea>
+      <textarea :id="'text' + i" v-model="entry.text" placeholder="Add some content!" required> </textarea>
     </article>
     <button id="addContent" class="pure-button-primary pure-button" @click="addContent">Add content</button>
     <button v-if="content.length > 0" id="removeContent" class="button-error pure-button" @click="removeContent">Remove last content</button>

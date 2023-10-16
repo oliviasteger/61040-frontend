@@ -25,8 +25,8 @@ const deleteThread = async () => {
   <p>{{ props.thread.content }}</p>
   <div class="base">
     <menu v-if="props.thread.user == currentUsername">
-      <li><button class="btn-small pure-button" @click="emit('editThread', props.thread._id)">Edit</button></li>
-      <li><button class="button-error btn-small pure-button" @click="deleteThread">Delete</button></li>
+      <li><button class="pure-button" @click="emit('editThread', props.thread._id)">Edit</button></li>
+      <li><button class="button-error pure-button" @click="deleteThread">Delete</button></li>
     </menu>
     <article class="timestamp">
       <p v-if="props.thread.dateCreated !== props.thread.dateUpdated">Edited on: {{ formatDate(props.thread.dateUpdated) }}</p>

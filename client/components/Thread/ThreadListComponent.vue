@@ -55,8 +55,8 @@ onBeforeMount(async () => {
       </div>
     </div>
   </section>
-  <article v-else-if="loaded">No threads found</article>
-  <p v-else>Loading...</p>
+  <article v-else-if="loaded"><p>No threads found</p></article>
+  <article v-else><p>Loading...</p></article>
 </template>
 
 <style scoped>

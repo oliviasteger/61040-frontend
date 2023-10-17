@@ -11,7 +11,6 @@ const content = ref(
   }),
 );
 
-console.log(props.message.content);
 const title = ref(props.message.title);
 const recipients = ref(props.message.recipients.toString());
 const scheduledTime = ref(props.message.scheduledTime);
@@ -26,7 +25,6 @@ const editMessage = async (
   }[],
   recipients: string,
 ) => {
-  console.log(title, scheduledTime, content, recipients);
   const recipientsParsed = recipients
     .replace(" ", "")
     .split(",")
@@ -59,15 +57,6 @@ const removeContent = () => {
 
 <template>
   <form @submit.prevent="editMessage(title, scheduledTime, content, recipients)">
-    <span>
-      <span>From: </span><router-link :to="{ name: 'Profile', params: { username: props.message.user } }">{{ props.message.user }}</router-link>
-      <br />
-      <span>To: </span>
-      <span v-for="(n, i) in props.message.recipients" :key="i">
-        <router-link :to="{ name: 'Profile', params: { username: n } }">{{ n }}</router-link>
-        <span v-if="i < props.message.recipients.length - 1">, </span>
-      </span>
-    </span>
     <input id="title" type="text" v-model="title" placeholder="Add a message title!" required />
     <input id="recipients" type="text" v-model="recipients" placeholder="Add recipient usernames!" required />
     <label for="time">Select send date: <input id="time" name="time" type="date" v-model="scheduledTime" required /></label>

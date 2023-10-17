@@ -21,6 +21,9 @@ const editThread = async (content: string) => {
 
 <template>
   <form @submit.prevent="editThread(text)">
+    <span class="author">
+      <router-link :to="{ name: 'Profile', params: { username: props.thread.user } }">{{ props.thread.user }}</router-link>
+    </span>
     <textarea id="text" v-model="text" placeholder="Create a thread!" required> </textarea>
     <div class="base">
       <menu>

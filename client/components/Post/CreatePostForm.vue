@@ -31,11 +31,12 @@ const emptyForm = () => {
 </script>
 
 <template>
-  <form @submit.prevent="createPost(picked === 'Content' ? text : null, picked === 'Image' ? text : null, tagged)">
+  <form @submit.prevent="createPost(picked === 'Content' ? text : null, picked === 'Image' ? text : null, tagged)" class="pure-form">
     <h3>Create a post</h3>
     <p>Select a post type:</p>
     <label for="image"> <input type="radio" name="type" id="image" value="Image" v-model="picked" required /> Image</label>
-    <label for="content"> <input type="radio" name="type" id="content" value="Content" v-model="picked" required /> Content</label>
+    <label for="content"> <input type="radio" name="type" id="content" value="Content" v-model="picked" required /> Text</label>
+    <p></p>
     <textarea id="text" v-model="text" :placeholder="picked === 'Content' ? 'Add some text!' : 'Add an image URL!'" required> </textarea>
     <input id="tagged" type="text" v-model="tagged" placeholder="Add tagged usernames!" />
     <button type="submit" class="pure-button-primary pure-button">Create Post</button>

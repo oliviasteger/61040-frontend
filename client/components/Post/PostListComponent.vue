@@ -55,18 +55,18 @@ onBeforeMount(async () => {
     <SearchPostForm @getPostsByAuthor="getPosts" />
     <section class="posts" v-if="loaded && posts.length !== 0">
       <div v-for="post in posts" :key="post._id">
-        <article>
-          <PostComponent v-if="editing !== post._id" :post="post" @refreshPosts="getPosts" @editPost="updateEditing" />
-          <EditPostForm v-else :post="post" @refreshPosts="getPosts" @editPost="updateEditing" />
+        <article v-if="editing !== post._id">
+          <PostComponent :post="post" @refreshPosts="getPosts" @editPost="updateEditing" />
         </article>
+        <EditPostForm v-else :post="post" @refreshPosts="getPosts" @editPost="updateEditing" />
         <div class="feedback">
           <ReactionComponent :post="post" />
           <ThreadListComponent :post="post" />
         </div>
       </div>
     </section>
-    <p v-else-if="loaded">No posts found!</p>
-    <p v-else>Loading...</p>
+    <article v-else-if="loaded">No posts found!</article>
+    <article v-else>Loading...</article>
   </section>
 </template>
 

@@ -11,6 +11,6 @@ const { isLoggedIn } = storeToRefs(useUserStore());
     <section>
       <h1 v-if="!isLoggedIn" style="text-align: center">Please log in to access posts!</h1>
     </section>
-    <PostListComponent />
+    <PostListComponent v-if="isLoggedIn" />
   </main>
 </template>

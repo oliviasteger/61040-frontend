@@ -113,7 +113,7 @@ onBeforeMount(async () => {
             <span v-if="i != topReactions.length - 1"> &nbsp; </span>
           </span>
         </span>
-        <span v-else> No reactions yet! </span>
+        <span v-else> No reactions found! </span>
       </div>
       <menu v-if="reactions.filter((reaction) => reaction.user === currentUsername).length !== 0">
         <input class="emoji-input" type="text" v-model="content" placeholder="Add an emoji!" />

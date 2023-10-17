@@ -54,26 +54,28 @@ onBeforeMount(async () => {
         <ScheduledMessageComponent :message="msg" status="locked" @refreshMessages="getScheduledMessages" @editMessage="updateEditing" />
       </article>
     </section>
-    <p v-else-if="loaded">No messages received yet!</p>
-    <p v-else>Loading...</p>
+    <article v-else-if="loaded">No received messages found!</article>
+    <article v-else>Loading...</article>
 
     <div class="row">
       <h2>Sent messages</h2>
     </div>
     <section class="sent" v-if="loaded && sent.length !== 0">
-      <article v-for="msg in sent" :key="msg._id">
-        <ScheduledMessageComponent
-          v-if="editing !== msg._id"
-          :message="msg"
-          :status="new Date(msg.scheduledTime).getTime() > Date.now() ? 'editable' : 'locked'"
-          @refreshMessages="getScheduledMessages"
-          @editMessage="updateEditing"
-        />
+      <div v-for="msg in sent" :key="msg._id">
+        <article v-if="editing !== msg._id">
+          <ScheduledMessageComponent
+            v-if="editing !== msg._id"
+            :message="msg"
+            :status="new Date(msg.scheduledTime).getTime() > Date.now() ? 'editable' : 'locked'"
+            @refreshMessages="getScheduledMessages"
+            @editMessage="updateEditing"
+          />
+        </article>
         <EditScheduledMessageForm v-else :message="msg" @refreshMessages="getScheduledMessages" @editMessage="updateEditing" />
-      </article>
+      </div>
     </section>
-    <article v-else-if="loaded">No messages sent yet!</article>
-    <p v-else>Loading...</p>
+    <article v-else-if="loaded">No sent messages found!</article>
+    <article v-else>Loading...</article>
   </section>
 </template>
 

@@ -28,11 +28,19 @@ const editPost = async (content: string | null, image: string | null, tagged: st
 </script>
 
 <template>
-  <form @submit.prevent="editPost(picked === 'Content' ? text : null, picked === 'Image' ? text : null, tagged === '' ? null : tagged)">
-    <span class="author">{{ props.post.author }} {{ props.post.tagged.length !== 0 ? "with" : "" }} {{ props.post.tagged.join(", ") }}</span>
+  <form @submit.prevent="editPost(picked === 'Content' ? text : null, picked === 'Image' ? text : null, tagged === '' ? null : tagged)" class="pure-form">
+    <span class="author">
+      <router-link :to="{ name: 'Profile', params: { username: props.post.author } }">{{ props.post.author }}</router-link>
+      {{ props.post.tagged.length !== 0 ? "with" : "" }}
+      <span v-for="(n, i) in props.post.tagged" :key="i">
+        <router-link :to="{ name: 'Profile', params: { username: n } }">{{ n }}</router-link>
+        <span v-if="i < props.post.tagged.length - 1">, </span>
+      </span>
+    </span>
     <p>Select a post type:</p>
     <label for="image"> <input type="radio" name="type" id="image" value="Image" v-model="picked" required /> Image</label>
-    <label for="content"> <input type="radio" name="type" id="content" value="Content" v-model="picked" required /> Content</label>
+    <label for="content"> <input type="radio" name="type" id="content" value="Content" v-model="picked" required /> Text</label>
+    <p></p>
     <textarea id="text" v-model="text" :placeholder="picked === 'Content' ? 'Add some text!' : 'Add an image URL!'" required> </textarea>
     <input id="tagged" type="text" v-model="tagged" placeholder="Add tagged usernames!" />
     <div class="base">

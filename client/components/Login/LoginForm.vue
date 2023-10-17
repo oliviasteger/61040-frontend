@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import router from "@/router";
+import { useFriendsStore } from "@/stores/friends";
 import { useUserStore } from "@/stores/user";
 import { ref } from "vue";
 
 const username = ref("");
 const password = ref("");
 const { loginUser, updateSession } = useUserStore();
+const { fetchFriendData } = useFriendsStore();
 
 async function login() {
   await loginUser(username.value, password.value);
-  void updateSession();
+  await updateSession();
+  await fetchFriendData();
   void router.push({ name: "Home" });
 }
 </script>

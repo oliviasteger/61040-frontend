@@ -63,7 +63,7 @@ const emptyForm = () => {
 </script>
 
 <template>
-  <form @submit.prevent="createScheduledMessage(title, scheduledTime, content, recipients)">
+  <form @submit.prevent="createScheduledMessage(title, scheduledTime, content, recipients)" class="pure-form pure-aligned-form">
     <h3>Schedule a message</h3>
     <input id="title" type="text" v-model="title" placeholder="Add a message title!" required />
     <input id="recipients" type="text" v-model="recipients" placeholder="Add recipient usernames!" required />

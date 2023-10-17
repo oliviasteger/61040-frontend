@@ -19,16 +19,26 @@ const deleteMessage = async () => {
 </script>
 
 <template>
-  <span>
-    <span>From: </span><router-link :to="{ name: 'Profile', params: { username: props.message.user } }">{{ props.message.user }}</router-link>
-    <br />
-    <span>To: </span>
-    <span v-for="(n, i) in props.message.recipients" :key="i">
-      <router-link :to="{ name: 'Profile', params: { username: n } }">{{ n }}</router-link>
-      <span v-if="i < props.message.recipients.length - 1">, </span>
-    </span>
-  </span>
-  <p class="message-title">{{ props.message.title }}</p>
+  <div class="message-header">
+    <p class="message-title">{{ props.message.title }}</p>
+    <div class="pure-g">
+      <div class="pure-u-1-12">
+        <p>From:</p>
+      </div>
+      <div class="pure-u-11-12">
+        <router-link :to="{ name: 'Profile', params: { username: props.message.user } }">{{ props.message.user }}</router-link>
+      </div>
+      <div class="pure-u-1-12">
+        <p>To:</p>
+      </div>
+      <div class="pure-u-11-12">
+        <span v-for="(n, i) in props.message.recipients" :key="i">
+          <router-link :to="{ name: 'Profile', params: { username: n } }">{{ n }}</router-link>
+          <span v-if="i < props.message.recipients.length - 1">, </span>
+        </span>
+      </div>
+    </div>
+  </div>
   <section class="scheduled-message-section" v-for="(c, i) in props.message.content" :key="'content' + i">
     <img v-if="'imageUrl' in c && c.imageUrl != null" :src="c.imageUrl" />
     <p v-else-if="'content' in c && c.content != null">{{ c.content }}</p>

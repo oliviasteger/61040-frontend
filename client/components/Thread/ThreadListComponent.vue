@@ -45,18 +45,18 @@ onBeforeMount(async () => {
   <CreateThreadForm v-if="thread" :thread="thread" @refreshThreads="getThreads" />
   <section class="threads" v-if="loaded && threads.length !== 0">
     <div v-for="thread in threads" :key="thread._id">
-      <article>
-        <ThreadComponent v-if="editing !== thread._id" :thread="thread" @refreshThreads="getThreads" @editThread="updateEditing" />
-        <EditThreadForm v-else :thread="thread" @refreshThreads="getThreads" @editThread="updateEditing" />
+      <article v-if="editing !== thread._id">
+        <ThreadComponent :thread="thread" @refreshThreads="getThreads" @editThread="updateEditing" />
       </article>
+      <EditThreadForm v-else :thread="thread" @refreshThreads="getThreads" @editThread="updateEditing" />
       <div class="feedback">
         <ReactionComponent :thread="thread" />
         <ThreadListComponent :thread="thread" />
       </div>
     </div>
   </section>
-  <article v-else-if="loaded"><p>No threads yet!</p></article>
-  <article v-else><p>Loading...</p></article>
+  <article v-else-if="loaded">No threads found!</article>
+  <article v-else>Loading...</article>
 </template>
 
 <style scoped>

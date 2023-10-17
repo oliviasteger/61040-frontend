@@ -19,9 +19,9 @@ const deleteThread = async () => {
 </script>
 
 <template>
-  <p class="author">
+  <span class="author">
     <router-link :to="{ name: 'Profile', params: { username: props.thread.user } }">{{ props.thread.user }}</router-link>
-  </p>
+  </span>
   <p>{{ props.thread.content }}</p>
   <div class="base">
     <menu v-if="props.thread.user == currentUsername">

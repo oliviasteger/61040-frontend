@@ -69,7 +69,22 @@ h3 {
   margin: 0em;
   background-color: var(--accent-bg);
   color: var(--dark-brown);
+  font-size: 1.5em;
 }
+
+h2, h3, .author, nav, .message-header {
+  font-weight: 400;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+}
+
+ h2 {
+  font-size: 2em;
+ }
+
+ nav a {
+  font-size: 1.5em;
+ }
 
 p {
   margin: 0em;
@@ -104,6 +119,15 @@ textarea {
   height: 6em;
 }
 
+form, article {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.settings-form {
+  box-shadow: none;
+  margin: 0em;
+}
+
 form {
   background-color: var(--dark-brown);
   color: var(--accent-bg);
@@ -114,7 +138,6 @@ form {
   padding: 1em;
   margin: 1em 0em 1em 0em;
 }
-
 
 article {
   background-color: var(--dark-brown);
@@ -162,17 +185,16 @@ article.inverse-article textarea {
 }
 
 .author {
-  font-weight: bold;
-  font-size: 1.2em;
   padding: 1em;
   border-radius: 4px;
   background-color: var(--accent-bg);
   color: var(--dark-brown);
+  font-size: 1.5em;
 }
 
 .message-header {
-  font-weight: bold;
   justify-content: left;
+  font-size: 1.2em;
   border-radius: 4px;
   padding: 1em;
   margin: 0em;
@@ -181,8 +203,7 @@ article.inverse-article textarea {
 }
 
 .message-title {
-  font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.5em;
 }
 
 .message-header a {
@@ -244,4 +265,42 @@ body {
 
 input.emoji-input {
   width: 7.5em;
+}
+
+.cards {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0.5em 0em 0em 0em;
+}
+
+.cards.horizontal {
+  flex-direction: row;
+  gap: 1em;
+}
+
+.cards.vertical {
+  flex-direction: column;
+  gap: 1em;
+}
+
+.cards.horizontal .card {
+  border-radius: 4px;
+  background-color: var(--accent-bg);
+  color: var(--dark-brown);
+  padding: 1em;
+  text-align: center;
+  flex: 1 1 0px;
+}
+
+.cards .card b {
+  font-size: 1.2em;
+}
+
+.card {
+  border-radius: 4px;
+  background-color: var(--accent-bg);
+  color: var(--dark-brown);
+  padding: 1em;
+  line-height: 2;
+  text-align: left;
 }

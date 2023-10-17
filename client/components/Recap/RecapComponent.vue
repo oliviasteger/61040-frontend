@@ -22,34 +22,45 @@ onBeforeMount(async () => {
 <template>
   <article v-if="loaded">
     <h3>Activity recap</h3>
-    <p>
-      ✉️ &nbsp; You had <b>{{ recap.numPost }} {{ recap.numPost == "1" ? "post" : "posts" }}</b> this month!
-    </p>
-    <p>
-      💬 &nbsp; You wrote <b> {{ recap.numThread }} {{ recap.numThread == "1" ? "comment" : "comments" }}</b> this month!
-    </p>
-    <p>
-      🙂 &nbsp; You're on a roll with <b> {{ recap.numReaction }} {{ recap.numReaction == "1" ? "reaction" : "reactions" }}</b> this month!
-    </p>
-    <p>
-      👥 &nbsp; You've interacted with
-      <span v-for="(n, i) in recap.mostInteractedWith" :key="i">
-        <router-link :to="{ name: 'Profile', params: { username: n } }">{{ n }}</router-link>
-        <span v-if="i < recap.mostInteractedWith.length - 2">, </span>
-        <span v-else-if="i == recap.mostInteractedWith.length - 1 && recap.mostInteractedWith.length != 1">, and</span>
-        <span v-else></span>
-      </span>
-      the most this month!
-    </p>
-    <p>
-      👥 &nbsp; You haven't interacted with
-      <span v-for="(n, i) in recap.leastInteractedWith" :key="i">
-        <router-link :to="{ name: 'Profile', params: { username: n } }">{{ n }}</router-link>
-        <span v-if="i < recap.leastInteractedWith.length - 2">, </span>
-        <span v-else-if="i == recap.leastInteractedWith.length - 1 && recap.mostInteractedWith.length != 1">, and</span>
-        <span v-else></span>
-      </span>
-      much this month. Maybe it's time to reach out. Look out for activity suggestion announcements, and invite them to do something!
-    </p>
+    <div class="horizontal cards">
+      <div class="card">
+        <p>✉️</p>
+        <b class="statistic">{{ recap.numPost }} {{ recap.numPost == "1" ? "post" : "posts" }}</b>
+        <p>this month</p>
+      </div>
+      <div class="card">
+        <p>💬</p>
+        <b class="statistic">{{ recap.numThread }} {{ recap.numThread == "1" ? "comment" : "comments" }}</b>
+        <p>this month</p>
+      </div>
+
+      <div class="card">
+        <p>🙂</p>
+        <b class="statistic">{{ recap.numReaction }} {{ recap.numReaction == "1" ? "reaction" : "reactions" }}</b>
+        <p>this month</p>
+      </div>
+    </div>
+    <div class="vertical cards">
+      <div class="card">
+        👥 &nbsp; You've interacted with
+        <span v-for="(n, i) in recap.mostInteractedWith" :key="i">
+          <router-link :to="{ name: 'Profile', params: { username: n } }">{{ n }}</router-link>
+          <span v-if="i < recap.mostInteractedWith.length - 2">, </span>
+          <span v-else-if="i == recap.mostInteractedWith.length - 1 && recap.mostInteractedWith.length != 1">, and</span>
+          <span v-else></span>
+        </span>
+        the most this month!
+      </div>
+      <div class="card">
+        👥 &nbsp; You haven't interacted with
+        <span v-for="(n, i) in recap.leastInteractedWith" :key="i">
+          <router-link :to="{ name: 'Profile', params: { username: n } }">{{ n }}</router-link>
+          <span v-if="i < recap.leastInteractedWith.length - 2">, </span>
+          <span v-else-if="i == recap.leastInteractedWith.length - 1 && recap.mostInteractedWith.length != 1">, and</span>
+          <span v-else></span>
+        </span>
+        much this month. Maybe it's time to reach out. Look out for activity suggestion announcements, and invite them to do something!
+      </div>
+    </div>
   </article>
 </template>

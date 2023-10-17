@@ -31,21 +31,22 @@ async function updatePhone() {
   <section>
     <form>
       <h3>Update user information</h3>
-      <form @submit.prevent="updateUsername" class="pure-form pure-form-aligned">
+      <p></p>
+      <form @submit.prevent="updateUsername" class="pure-form settings-form">
         <menu>
           <input type="text" placeholder="New username" v-model="username" required />
           <button type="submit" class="pure-button pure-button-primary">Update username</button>
         </menu>
       </form>
 
-      <form @submit.prevent="updatePassword" class="pure-form">
+      <form @submit.prevent="updatePassword" class="pure-form settings-form">
         <menu>
           <input type="password" placeholder="New password" v-model="password" required />
           <button type="submit" class="pure-button pure-button-primary">Update password</button>
         </menu>
       </form>
 
-      <form @submit.prevent="updatePhone" class="pure-form">
+      <form @submit.prevent="updatePhone" class="pure-form settings-form">
         <menu>
           <input type="tel" placeholder="New phone number" v-model="phone" required />
           <button type="submit" class="pure-button pure-button-primary">Update phone number</button>

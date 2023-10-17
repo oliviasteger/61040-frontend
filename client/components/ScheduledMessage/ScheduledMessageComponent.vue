@@ -23,13 +23,13 @@ const deleteMessage = async () => {
     <p class="message-title">{{ props.message.title }}</p>
     <div class="pure-g">
       <div class="pure-u-1-12">
-        <p>From:</p>
+        <p>From</p>
       </div>
       <div class="pure-u-11-12">
         <router-link :to="{ name: 'Profile', params: { username: props.message.user } }">{{ props.message.user }}</router-link>
       </div>
       <div class="pure-u-1-12">
-        <p>To:</p>
+        <p>To</p>
       </div>
       <div class="pure-u-11-12">
         <span v-for="(n, i) in props.message.recipients" :key="i">

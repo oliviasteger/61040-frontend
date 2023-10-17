@@ -53,10 +53,10 @@ watch(props, async (newProps) => {
     <br />
     <SearchProfileForm :username="username" />
     <section v-if="loaded && profile">
-      <article>
-        <ProfileComponent v-if="editing !== profile._id" :profile="profile" @refreshProfile="getProfile" @editProfile="updateProfile" />
-        <EditProfileForm v-else :profile="profile" @refreshProfile="getProfile" @editProfile="updateProfile" />
+      <article v-if="editing !== profile._id">
+        <ProfileComponent :profile="profile" @refreshProfile="getProfile" @editProfile="updateProfile" />
       </article>
+      <EditProfileForm v-else :profile="profile" @refreshProfile="getProfile" @editProfile="updateProfile" />
       <FriendComponent v-if="currentUsername !== username" :user="username" />
       <PostAuthorListComponent v-if="friends.includes(username) || currentUsername === username" :author="username" />
       <article v-else>Cannot view posts without being friends!</article>

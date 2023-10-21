@@ -30,7 +30,7 @@ async function register() {
       </div>
       <div class="pure-control-group">
         <label for="aligned-phone">Phone Number</label>
-        <input v-model.trim="phone" type="tel" id="aligned-phone" placeholder="Phone Number" required />
+        <input v-model.trim="phone" type="tel" maxlength="10" id="aligned-phone" placeholder="Phone Number" required />
       </div>
       <div class="pure-controls">
         <button type="submit" class="pure-button pure-button-primary">Register</button>

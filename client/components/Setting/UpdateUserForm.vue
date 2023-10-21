@@ -48,7 +48,7 @@ async function updatePhone() {
 
       <form @submit.prevent="updatePhone" class="pure-form settings-form">
         <menu>
-          <input type="tel" placeholder="New phone number" v-model="phone" required />
+          <input type="tel" maxlength="10" placeholder="New phone number" v-model="phone" required />
           <button type="submit" class="pure-button pure-button-primary">Update phone number</button>
         </menu>
       </form>

@@ -404,13 +404,20 @@ class Routes {
     }
 
     // Order interactions by most interacted to least interacted with
+    interactions.delete(user.toString());
+
+    console.log(interactions.entries());
     const interactionsDescending = [...interactions.entries()]
       .sort((x, y) => y[1] - x[1])
       .map((x) => new ObjectId(x[0]))
       .filter((x) => x.toString() != user.id.toString());
     const numSlots = Math.min(3, interactionsDescending.length % 2 == 0 ? interactionsDescending.length / 2 : (interactionsDescending.length - 1) / 2);
+    const numExtra = interactionsDescending.length % 2 == 1 && interactionsDescending.length < 6 ? 1 : 0;
 
-    const recap = await Recap.create(user, numPost, numThread, numReaction, interactionsDescending.slice(0, numSlots), interactionsDescending.slice(-1 * numSlots));
+    const mostInteractedWith = interactionsDescending.slice(0, numSlots);
+    const leastInteractedWith = interactionsDescending.slice(-1 * (numSlots + numExtra));
+
+    const recap = await Recap.create(user, numPost, numThread, numReaction, mostInteractedWith, leastInteractedWith);
     if (recap.recap !== null) return await Responses.recap(recap.recap);
   }
 

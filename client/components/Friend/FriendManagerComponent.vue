@@ -41,7 +41,7 @@ onBeforeMount(async () => {
     </div>
     <section class="list" v-if="sentRequests.length !== 0">
       <div v-for="request in sentRequests" :key="request._id">
-        <FriendComponent :user="request.from" />
+        <FriendComponent :user="request.to" />
       </div>
     </section>
     <article v-else><p>No sent friend requests found!</p></article>

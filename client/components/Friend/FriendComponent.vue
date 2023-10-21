@@ -2,7 +2,6 @@
 import { computed, ref } from "vue";
 
 import { useFriendsStore } from "@/stores/friends";
-
 const { friends, sentRequests, receivedRequests, sendRequest, deleteRequest, acceptRequest, rejectRequest, deleteFriend } = useFriendsStore();
 
 const props = defineProps(["user"]);

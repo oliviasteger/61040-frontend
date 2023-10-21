@@ -69,13 +69,16 @@ const removeContent = () => {
     </article>
     <button id="addContent" class="pure-button-primary pure-button" @click="addContent">Add content</button>
     <button v-if="content.length > 1" id="removeContent" class="button-error pure-button" @click="removeContent">Remove last content</button>
+
+    <div class="base">
+      <menu>
+        <li><button class="pure-button-primary pure-button" type="submit">Save</button></li>
+        <li><button class="pure-button" @click="emit('editMessage')">Cancel</button></li>
+      </menu>
+      <article class="timestamp">
+        <p v-if="props.message.dateCreated !== props.message.dateUpdated">Edited on: {{ formatDate(props.message.dateUpdated) }}</p>
+        <p v-else>Created on: {{ formatDate(props.message.dateCreated) }}</p>
+      </article>
+    </div>
   </form>
-  <div class="base">
-    <menu>
-      <li><button class="pure-button-primary pure-button" type="submit">Save</button></li>
-      <li><button class="pure-button" @click="emit('editMessage')">Cancel</button></li>
-    </menu>
-    <p v-if="props.message.dateCreated !== props.message.dateUpdated" class="timestamp">Edited on: {{ formatDate(props.message.dateUpdated) }}</p>
-    <p v-else class="timestamp">Created on: {{ formatDate(props.message.dateCreated) }}</p>
-  </div>
 </template>

@@ -29,8 +29,10 @@ const editProfile = async (name: string, details: string) => {
         <li><button class="pure-button-primary pure-button" type="submit">Save</button></li>
         <li><button class="pure-button" @click="emit('editProfile')">Cancel</button></li>
       </menu>
-      <p v-if="props.profile.dateCreated !== props.profile.dateUpdated" class="timestamp">Edited on: {{ formatDate(props.profile.dateUpdated) }}</p>
-      <p v-else class="timestamp">Created on: {{ formatDate(props.profile.dateCreated) }}</p>
+      <article class="timestamp">
+        <p v-if="props.profile.dateCreated !== props.profile.dateUpdated">Edited on: {{ formatDate(props.profile.dateUpdated) }}</p>
+        <p v-else>Created on: {{ formatDate(props.profile.dateCreated) }}</p>
+      </article>
     </div>
   </form>
 </template>

@@ -30,8 +30,10 @@ const editThread = async (content: string) => {
         <li><button class="pure-button-primary pure-button" type="submit">Save</button></li>
         <li><button class="pure-button" @click="emit('editThread')">Cancel</button></li>
       </menu>
-      <p v-if="props.thread.dateCreated !== props.thread.dateUpdated" class="timestamp">Edited on: {{ formatDate(props.thread.dateUpdated) }}</p>
-      <p v-else class="timestamp">Created on: {{ formatDate(props.thread.dateCreated) }}</p>
+      <article class="timestamp">
+        <p v-if="props.thread.dateCreated !== props.thread.dateUpdated">Edited on: {{ formatDate(props.thread.dateUpdated) }}</p>
+        <p v-else>Created on: {{ formatDate(props.thread.dateCreated) }}</p>
+      </article>
     </div>
   </form>
 </template>
